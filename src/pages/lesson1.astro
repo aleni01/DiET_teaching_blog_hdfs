@@ -1,5 +1,7 @@
 ---
+import type { loadRenderers } from "astro:container";
 import "../styles/global.css";
+import Quiz from "../components/quiz.jsx"
 ---
 
 <html>
@@ -7,6 +9,25 @@ import "../styles/global.css";
     <h1>Lesson 1: Introduction to HDFS</h1>
 
     <p>This lesson explains the basics of HDFS.</p>
+
+    <p> Let's try a quiz</p>
+
+    <Quiz
+    client:load 
+    question="Which node stores metadata in HDFS?"
+    options={["NameNode", "DataNode", "Client"]}
+    correct="NameNode"
+    explanations = {{
+      "NameNode": {
+          text: "The NameNode is responsible for metadata like directory structure and file locations"
+      },
+      "DataNode": {
+          text: "Hallo"
+      },
+      "Client": {
+        text: "Answer 3"
+      }
+    }}/>
 
     <a href="..">Back Home</a>
   </body>
