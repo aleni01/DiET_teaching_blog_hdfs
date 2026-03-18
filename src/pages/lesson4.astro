@@ -1,0 +1,46 @@
+---
+import type { loadRenderers } from "astro:container";
+import "../styles/global.css";
+import "../styles/index.css";
+import Animation from "../components/Animation.tsx";
+---
+
+
+<html>
+    <head>
+		<link rel="icon" type="image/png" href="/DiET_teaching_blog_hdfs//favicon-h.png"/>
+	  </head>
+  <body>
+<h1 style="text-align: center;">DataNodes and the replication strategy</h1>
+
+<p>The DataNodes are responsible for storing the individual data blocks of the files. If a client wants to store its data on HDFS, it sends a request to the NameNode and the NameNode then tells the client on which DataNodes to store the data. The DataNode itself also has some metadata where it keeps track of which blocks it has stored. Again, regarding to this it seems to be good to select a big block size, so that the DataNode has less to store. But the individual blocks of data are usually not only stored once on the DataNodes, but multiple times to ensure that if a DataNodes does not work anymore or a block is corrupted, there still exists other copies which you can rely on. The default replication factor is 3, meaning that each block is stored in total 3 times. If a data block has not enough replicas anymore because of corruption for example, then the block is replicated again somewhere to make sure that replication strategy is fulfilled. Therefore imagine having lost a block of a big size. It would be very costly to replicate it. Therefore, you get the tradeoff why we do not want a too small block size, but also not a too large one.
+Select on the slider to which DataNode you want to connect to and then look where the individual blocks are stored. Then use the replication slider to investigate where the copies are stored. Can you find some rules?</p>
+
+TODO: add animation
+
+<p>In fact, there are some rules the replication is done. The first block is stored to the DataNode the client is connected to. The second replica is stored on a DataNode that sits on a different rack. The third replica is stored on the same rack as the second replica, but on a different DataNode. From the fourth replica on, there are two main goals. There should be at most one replica on a DataNode and there should be at most two DataNodes per rack that store that specific block. Of course, these cannot always be fulfilled.</p>
+
+<p>goal: explain how blocks are put on datanodes based on where you put client + replica factor rules</p>
+
+
+<!-- <Animation client:load/> -->
+    <!-- <a href="..">Back Home</a>
+    <a href="../lesson3/">Previous</a>
+    <a href="../lesson5/">Next</a> -->
+
+    <div class="flex justify-center gap-4 mt-6">
+        <a href=".." class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2">
+            Back Home
+          </a>
+          
+          <a href="../lesson3/" class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2">
+            Previous
+          </a>
+
+          <a href="../lesson5/" class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2">
+            Next
+          </a>
+          
+          </div>
+  </body>
+</html>

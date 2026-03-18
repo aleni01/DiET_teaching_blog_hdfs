@@ -1,0 +1,66 @@
+---
+import type { loadRenderers } from "astro:container";
+import "../styles/global.css";
+import "../styles/index.css";
+import Animation from "../components/Animation_lesson2.tsx";
+---
+
+<html>
+  <head>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/DiET_teaching_blog_hdfs//favicon-h.png"
+    />
+  </head>
+  <body>
+    <h1 style="text-align: center;">Splitting up files</h1>
+
+    <p>
+      As the files are usually huge, they do not fit on a single machine. As a
+      consequence, they have to somehow be split up into individual pieces and
+      those pieces are then spread over multiple machines. What is done in HDFS
+      is, that the files are splitted up into equal-sized blocks. If the file
+      size does not correspond to a multiple of the selected block size, then
+      the remaining part is stored exactly at the size that it remains without
+      padding. Use the slider below to select a file size and then play around
+      with the block size. Try to understand the influence of the block size.
+      How many blocks will a file be splitted up to? Once you have a feeling for
+      it, click on Next.
+    </p>
+
+    <p>TODO: add animation</p>
+
+    <p>
+      goal: explain splitting up file using file block size + file size slider
+    </p>
+
+    <Animation client:load />
+    <!-- <a href="..">Back Home</a>
+    <a href="../lesson1/">Previous</a>
+    <a href="../lesson3/">Next</a> -->
+
+    <div class="flex justify-center gap-4 mt-6">
+      <a
+        href=".."
+        class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)]"
+      >
+        Back Home
+      </a>
+
+      <a
+        href="../lesson1/"
+        class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2"
+      >
+        Previous
+      </a>
+
+      <a
+        href="../lesson3/"
+        class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2"
+      >
+        Next
+      </a>
+    </div>
+  </body>
+</html>

@@ -8,8 +8,14 @@ import { defineConfig } from 'astro/config';
 
 import react from '@astrojs/react';
 
+import tailwindcss from '@tailwindcss/vite';
+
 export default defineConfig({
   base: '/DiET_teaching_blog_hdfs/',
   trailingSlash: "always",
-  integrations: [react()]
+  integrations: [react()],
+
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });

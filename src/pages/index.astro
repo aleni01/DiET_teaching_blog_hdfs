@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import "../styles/index.css";
 ---
 
 <!-- <html lang="en">
@@ -18,10 +19,22 @@ import "../styles/global.css";
 
 
 <html>
+	<head>
+		<link rel="icon" type="image/png" href="/DiET_teaching_blog_hdfs//favicon-h.png"/>
+	  </head>
   <body>
-    <h1>HDFS Interactive Learning Blog</h1>
-    <p>Welcome to my course project.</p>
+    <h1 style="text-align: center;">HDFS Interactive Learning Blog</h1>
+    <p>Welcome to my course project. In this blog you will learn what HDFS is and what it is used for, how the block size influences storage requirements and how blocks are stored. Click on next to start the journey!</p>
 
-    <a href="lesson1/">Go to Lesson 1</a>
+	<!-- <p>Goals: introduce what this website is about and what are its goals</p> -->
+
+    <!-- <a href="lesson1/">Next</a> -->
+	<div class="flex justify-center gap-4 mt-6">
+
+          <a href="lesson1/" class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2">
+            Next
+          </a>
+          
+	</div>
   </body>
 </html>
