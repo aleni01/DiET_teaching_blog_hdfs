@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Controls } from './Controls';
 import { FilePanel } from './FilePanel';
-import { NameNodePanel } from './NameNodePanel';
+import { NameNodePanel } from './NameNodePanel_new';
 import { ClusterPanel } from './ClusterPanel';
 import type { FileData, RackData, DataNodeData } from '../types';
 import { BLOCK_SIZES, FILE_SIZE_STEPS, FILE_HUES, DATANODE_CAPACITY } from '../constants';
@@ -110,7 +110,7 @@ export default function App() {
   const metadataSize = useMemo(() => calculateMetadataSize(totalBlocks), [totalBlocks]);
 
   return (
-    <div className="min-h-screen bg-zinc-100 text-zinc-900 font-sans selection:bg-zinc-900 selection:text-white flex flex-col">
+    <div className="rounded-xl container mx-auto bg-[oklch(0.8335_0.026_84.59)] text-zinc-900 font-sans selection:bg-zinc-900 selection:text-white flex flex-col">
 
       <main className="p-8 max-w-[1800px] mx-auto flex-grow flex flex-col gap-8 w-full">
         {/* Bottom Section: Controls */}

@@ -3,6 +3,7 @@ import type { loadRenderers } from "astro:container";
 import "../styles/global.css";
 import "../styles/index.css";
 import Animation from "../components/Animation_lesson3.tsx";
+import ProgressBar from "./progressbar.astro";
 ---
 
 
@@ -11,15 +12,16 @@ import Animation from "../components/Animation_lesson3.tsx";
 		<link rel="icon" type="image/png" href="/DiET_teaching_blog_hdfs//favicon-h.png"/>
 	  </head>
   <body>
+    <ProgressBar step={3} total={6} />
 <h1 style="text-align: center;">NameNode</h1>
 
-<p>Now that you know how the block size influences in how many blocks a file is split up, let's try to understand what this implies for the individual parts of the HDFS architecture. The NameNode's role is to coordinate and to take care of the logistics regarding to where all individual blocks are stored. It is responsible for storing three different things in his memory. The first thing is that it stores the namespace tree for keeping track how the hierarchy between the individual files look like. This resembles a lot the local filesystem. The second thing that it stores is the mapping from the file to its individual blocks. And here comes into play the block size you selected before. The last thing that the NameNode stores are the mappings from Blocks to which DataNodes they are stored on. Again, select a block size and see how the memory of the NameNode changes.
+<p class="py-8">Now that you know how the block size influences in how many blocks a file is split up, let's try to understand what this implies for the individual parts of the HDFS architecture. The NameNode's role is to coordinate and to take care of the logistics regarding to where all individual blocks are stored. It is responsible for storing three different things in his memory. The first thing is that it stores the namespace tree for keeping track how the hierarchy between the individual files look like. This resembles a lot the local filesystem. The second thing that it stores is the mapping from the file to its individual blocks. And here comes into play the block size you selected before. The last thing that the NameNode stores are the mappings from Blocks to which DataNodes they are stored on. Again, select a block size and see how the memory of the NameNode changes.
 
 TODO: add animation NameNode, file size + block split up
 
 As you can see, if you select a smaller block size, the NameNode has to store many more mappings than with a bigger block size. Therefore, it seems to be better to use a big block size, no? Let's go to the next part</p>
 
-<p>goal:explain how block size influences NameNode</p>
+<!-- <p>goal:explain how block size influences NameNode</p> -->
 
 
 <Animation client:load/>

@@ -3,6 +3,7 @@ import type { loadRenderers } from "astro:container";
 import "../styles/global.css";
 import Quiz from "../components/quiz.jsx"
 import "../styles/index.css";
+import ProgressBar from "./progressbar.astro";
 ---
 
 <html>
@@ -10,13 +11,16 @@ import "../styles/index.css";
 		<link rel="icon" type="image/png" href="/DiET_teaching_blog_hdfs//favicon-h.png"/>
 	  </head>
   <body>
+    <ProgressBar step={1} total={6} />
     <h1 style="text-align: center;">HDFS</h1>
 
-    <p>HDFS stands for Hadoop distributed file systems and is a datacenter that is used to store data and files that are too big to store them on a single machine. Those files typically are of sizes in GB to TB range. The architecture of HDFS is centralized, consisting of a Master Node named NameNode and thousands of DataNodes. The NameNode is responsible for keeping track how files are splitted up and where the individual pieces of it are stored. The DataNodes store the individual data blocks. Multiple DataNodes are stacked on each other in a so-called rack and the racks form the datacenter. Click on Next to see how files are splitted up.</p>
+    <p class="py-8">HDFS stands for Hadoop distributed file systems and is a datacenter that is used to store data and files that are too big to store them on a single machine. Those files typically are of sizes in GB to TB range. The architecture of HDFS is centralized, consisting of a Master Node named NameNode and thousands of DataNodes. The NameNode is responsible for keeping track how files are splitted up and where the individual pieces of it are stored. The DataNodes store the individual data blocks. Multiple DataNodes are stacked on each other in a so-called rack and the racks form the datacenter. Click on Next to see how files are splitted up.</p>
 
     <p>TODO:füge ein bild ein wie so ein datacenter aufgebaut ist mit DataNodes und NameNodes</p>
 
     <p>goal: explain what is HDFS</p>
+
+    <img src="../public/architecture.png" class="center" alt="The architecture of HDFS" />   
 
     <!-- <p>This lesson explains the basics of HDFS.</p>
 

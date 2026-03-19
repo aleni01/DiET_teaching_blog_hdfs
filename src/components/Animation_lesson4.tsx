@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Controls } from './Controls_lesson3';
+import { Controls } from './Controls_lesson4';
 import { FilePanel } from './FilePanel';
-import { NameNodePanel } from './NameNodePanel_lesson3';
+import { NameNodePanel } from './NameNodePanel_new';
 import { ClusterPanel } from './ClusterPanel';
 import type { FileData, RackData, DataNodeData } from '../types';
 import { BLOCK_SIZES, FILE_SIZE_STEPS, FILE_HUES, DATANODE_CAPACITY } from '../constants';
@@ -36,7 +36,7 @@ const INITIAL_RACKS: RackData[] = [
 ];
 
 export default function App() {
-  const [numFiles, setNumFiles] = useState(4);
+  const [numFiles, setNumFiles] = useState(1);
   const [blockSizeIdx, setBlockSizeIdx] = useState(2); // Default 128MB
   const [files, setFiles] = useState<FileData[]>([]);
   const [racks, setRacks] = useState<RackData[]>(INITIAL_RACKS);
@@ -62,7 +62,7 @@ export default function App() {
             sizeBytes,
             colorHue: hue,
             blocks: generateBlocksForFile(id, sizeBytes, blockSizeBytes, i),
-            replicationFactor: 3,
+            replicationFactor: 1,
             clientNodeId: 'dn-1'
           });
         }
@@ -100,7 +100,7 @@ export default function App() {
   };
 
   const resetSimulation = () => {
-    setNumFiles(4);
+    setNumFiles(1);
     setBlockSizeIdx(2);
     setFiles([]);
     setRacks(INITIAL_RACKS);
@@ -113,12 +113,8 @@ export default function App() {
     <div className="rounded-xl container mx-auto bg-[oklch(0.8335_0.026_84.59)] text-zinc-900 font-sans selection:bg-zinc-900 selection:text-white flex flex-col">
 
       <main className="p-8 max-w-[1800px] mx-auto flex-grow flex flex-col gap-8 w-full">
-       
-
-        {/* Top Section: 3 Columns */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
-           {/* Bottom Section: Controls */}
-        <div className="lg:col-span-6">
+        {/* Bottom Section: Controls */}
+        <div className="w-full">
           <Controls 
             numFiles={numFiles}
             setNumFiles={setNumFiles}
@@ -129,23 +125,26 @@ export default function App() {
             onReset={resetSimulation}
           />
         </div>
-          {/* Left Column: NameNode */}
-          <div className="lg:col-span-6">
+
+        {/* Top Section: 3 Columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
+          {/* Left Column: NameNode
+          <div className="lg:col-span-3 min-h-[500px]">
             <NameNodePanel 
               files={files} 
               metadataSize={metadataSize} 
             />
-          </div>
+          </div> */}
 
           {/* Center Column: DataNodes & Racks */}
-          {/* <div className="lg:col-span-6 min-h-[500px]">
+          <div className="lg:col-span-8">
             <ClusterPanel racks={racks} allBlocks={files.flatMap(f => f.blocks)} files={files} />
-          </div> */}
+          </div>
 
           {/* Right Column: Files & Blocks */}
-          {/* <div className="lg:col-span-6">
-            <FilePanel files={files} lessonNumber={3}/>
-          </div> */}
+          <div className="lg:col-span-4">
+            <FilePanel files={files} lessonNumber={4} />
+          </div>
         </div>
 
         

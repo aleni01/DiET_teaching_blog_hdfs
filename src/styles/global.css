@@ -15,8 +15,15 @@ body {
     padding-left: 150px;
     padding-right: 150px;
     margin: auto;
+    text-align: justify;
   }
-  
+
+  .centered-text {
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+  }
+
   h1 {
     color: #7c0044; /*great color: #7c0044*/
     font-weight: bold;
@@ -24,4 +31,46 @@ body {
     /* font-family: fantasy; */
     /* font-family: 'Typo Round Bold Demo', sans-serif; */
     font-family: 'Goudy Old Style', sans-serif;
+  }
+
+  .progress-bar {
+    height: 20px;
+    background: #fff9edfd;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: #7c0044;
+    transition: width 0.4s ease;
+  
+    /* centers text INSIDE colored area */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    color: #fff9edfd;
+    font-weight: 100;
+  }
+  
+  .progress-text {
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .progress-wrapper {
+    width: 20%;
+
+    position: absolute;
+    top: 20px;
+    right: 75px;
+
+  } 
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
   }

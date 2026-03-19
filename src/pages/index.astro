@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import "../styles/index.css";
+import ProgressBar from "./progressbar.astro";
 ---
 
 <!-- <html lang="en">
@@ -23,6 +24,7 @@ import "../styles/index.css";
 		<link rel="icon" type="image/png" href="/DiET_teaching_blog_hdfs//favicon-h.png"/>
 	  </head>
   <body>
+	<ProgressBar step={0} total={6} />
     <h1 style="text-align: center;">HDFS Interactive Learning Blog</h1>
     <p>Welcome to my course project. In this blog you will learn what HDFS is and what it is used for, how the block size influences storage requirements and how blocks are stored. Click on next to start the journey!</p>
 
@@ -36,5 +38,8 @@ import "../styles/index.css";
           </a>
           
 	</div>
+	
+
+
   </body>
 </html>

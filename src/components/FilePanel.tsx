@@ -48,22 +48,52 @@ export const FilePanel: React.FC<FilePanelProps> = ({
                     //   {formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}
                     //   Blocks
                     // </p>
-                    <label className="text-xs font-bold flex items-center gap-2" style={{ color: `hsl(${file.colorHue}, 70%, 40%)` }}>
-                              {/* <div className="w-2 h-2 rounded-full" style={{ backgroundColor: `hsl(${file.colorHue}, 70%, 50%)` }} /> */}
-                              {/* File {idx + 1} */}
-                            <span className="text-[15px] font-bold text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-full tracking-wider">{formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}Blocks</span>
-                      </label>
+                    <label
+                      className="text-xs font-bold flex items-center gap-2"
+                      style={{ color: `hsl(${file.colorHue}, 70%, 40%)` }}
+                    >
+                      {/* <div className="w-2 h-2 rounded-full" style={{ backgroundColor: `hsl(${file.colorHue}, 70%, 50%)` }} /> */}
+                      {/* File {idx + 1} */}
+                      <span className="text-[15px] font-bold text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-full tracking-wider">
+                        {formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}
+                        Blocks
+                      </span>
+                    </label>
                   )}
                   {lessonNumber == 3 && (
                     // <p className="text-[15px] text-zinc-400 font-mono uppercase tracking-wider">
                     //   {formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}
                     //   Blocks
                     // </p>
-                    <label className="text-xs font-bold flex items-center gap-2" style={{ color: `hsl(${file.colorHue}, 70%, 40%)` }}>
-                              {/* <div className="w-2 h-2 rounded-full" style={{ backgroundColor: `hsl(${file.colorHue}, 70%, 50%)` }} /> */}
-                              {/* File {idx + 1} */}
-                            <span className="text-[15px] font-bold text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-full tracking-wider">{formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}Blocks</span>
-                      </label>
+                    <label
+                      className="text-xs font-bold flex items-center gap-2"
+                      style={{ color: `hsl(${file.colorHue}, 70%, 40%)` }}
+                    >
+                      {/* <div className="w-2 h-2 rounded-full" style={{ backgroundColor: `hsl(${file.colorHue}, 70%, 50%)` }} /> */}
+                      {/* File {idx + 1} */}
+                      <span className="text-[15px] font-bold text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-full tracking-wider">
+                        {formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}
+                        Blocks
+                      </span>
+                    </label>
+                  )}
+
+                  {lessonNumber == 4 && (
+                    // <p className="text-[15px] text-zinc-400 font-mono uppercase tracking-wider">
+                    //   {formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}
+                    //   Blocks
+                    // </p>
+                    <label
+                      className="text-xs font-bold flex items-center gap-2"
+                      style={{ color: `hsl(${file.colorHue}, 70%, 40%)` }}
+                    >
+                      {/* <div className="w-2 h-2 rounded-full" style={{ backgroundColor: `hsl(${file.colorHue}, 70%, 50%)` }} /> */}
+                      {/* File {idx + 1} */}
+                      <span className="text-[15px] font-bold text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-full tracking-wider">
+                        {formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}
+                        Blocks
+                      </span>
+                    </label>
                   )}
                 </div>
               </div>

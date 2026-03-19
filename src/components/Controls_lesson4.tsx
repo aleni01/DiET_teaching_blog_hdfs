@@ -19,7 +19,7 @@ interface ControlsProps {
 }
 
 export const Controls: React.FC<ControlsProps> = ({
-  numFiles = 4,
+  numFiles,
   setNumFiles,
   blockSizeIdx,
   setBlockSizeIdx,
@@ -40,38 +40,44 @@ export const Controls: React.FC<ControlsProps> = ({
         </button>
       </div> */}
 
-      {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8"> */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Column 1: Global Controls */}
         <div className="space-y-6">
-          {/* <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-400">
+          <h3 className="text-[15px] font-bold uppercase tracking-widest text-zinc-900">
             Global Controls
-          </h3> */}
+          </h3>
           <div className="space-y-4">
-            {/* <div>
-              <label className="flex items-center gap-2 text-sm font-semibold text-zinc-700 mb-2">
+            <div>
+              <h2 className="text-xl font-bold tracking-tight text-zinc-900">
                 Number of Files
-                <span className="text-xs font-normal text-zinc-400 bg-zinc-100 px-2 py-0.5 rounded-full">{numFiles}</span>
-              </label>
-              <input 
-                type="range" 
-                min="1" 
-                max="4" 
-                value={numFiles} 
+              </h2>
+              <input
+                type="range"
+                min="1"
+                max="2"
+                step="1"
+                value={numFiles}
                 onChange={(e) => setNumFiles(parseInt(e.target.value))}
-                className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-zinc-900"
+                className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-[#7c0044]"
               />
-            </div> */}
+              <div className="flex justify-between mt-2 text-[15px] text-zinc-400 font-mono uppercase tracking-wider">
+                {Array.from({ length: 2 }).map((s, i) => (
+                  <span
+                    key={i}
+                    className={
+                      i + 1 === numFiles ? "text-zinc-900 font-bold" : ""
+                    }
+                  >
+                    {i + 1}
+                  </span>
+                ))}
+              </div>
+            </div>
 
             <div>
-              {/* <label className="flex items-center gap-2 text-sm font-semibold text-zinc-700 mb-2"> */}
               <h2 className="text-xl font-bold tracking-tight text-zinc-900">
                 Block Size
               </h2>
-              {/* Block Size
-                            <span className="text-xs font-normal text-zinc-400 bg-zinc-100 px-2 py-0.5 rounded-full">
-                              {BLOCK_SIZES[blockSizeIdx].label}
-                            </span> */}
-              {/* </label> */}
               <input
                 type="range"
                 min="0"
@@ -79,10 +85,9 @@ export const Controls: React.FC<ControlsProps> = ({
                 step="1"
                 value={blockSizeIdx}
                 onChange={(e) => setBlockSizeIdx(parseInt(e.target.value))}
-                // className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-zinc-900"
                 className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-[#7c0044]"
               />
-              <div className="flex justify-between mt-2 text-[15px] text-zinc-400 font-mono uppercase ">
+              <div className="flex justify-between mt-2 text-[15px] text-zinc-400 font-mono uppercase tracking-wider">
                 {BLOCK_SIZES.map((s, i) => (
                   <span
                     key={i}
@@ -96,13 +101,52 @@ export const Controls: React.FC<ControlsProps> = ({
               </div>
             </div>
           </div>
-        {/* </div> */}
+        </div>
 
-        {/* Column 2: Files 1 & 2 */}
-        <div className="space-y-6">
-          {/* <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-400">
-            Files 1 & 2
+        {/* Column 2: File 1*/}
+        <div>
+          {/* <h3 className="text-[15px] font-bold uppercase tracking-widest text-zinc-900">
+            File 1
           </h3> */}
+          <div className="space-y-8">
+            {files.slice(0, 1).map((file, idx) => (
+              <FileControl
+                key={file.id}
+                file={file}
+                idx={idx}
+                updateFileProperty={updateFileProperty}
+              />
+            ))}
+          </div>
+       
+        </div>
+
+        {/* Column 3: File 2 */}
+        <div>
+          <div className="space-y-8">
+            {files.slice(1, 2).map((file, idx) => (
+              <FileControl
+                key={file.id}
+                file={file}
+                idx={idx+1}
+                updateFileProperty={updateFileProperty}
+              />
+            ))}
+          </div>
+          {files.length < 2 && (
+              <div className="h-full flex items-center justify-center border-2 border-dashed border-zinc-100 rounded-xl p-8">
+                <p className="text-xs text-zinc-400 italic">
+                  Add more files to see controls
+                </p>
+              </div>
+            )}
+        </div>
+
+        {/* Column 2: Files 1 & 2
+        <div className="space-y-6">
+          <h3 className="text-[15px] font-bold uppercase tracking-widest text-zinc-900">
+            Files 1 & 2
+          </h3>
           <div className="space-y-8">
             {files.slice(0, 2).map((file, idx) => (
               <FileControl
@@ -113,13 +157,13 @@ export const Controls: React.FC<ControlsProps> = ({
               />
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Column 3: Files 3 & 4 */}
-        <div className="space-y-6">
-          {/* <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-400">
+        {/* <div className="space-y-6">
+          <h3 className="text-[15px] font-bold uppercase tracking-widest text-zinc-900">
             Files 3 & 4
-          </h3> */}
+          </h3>
           <div className="space-y-8">
             {files.slice(2, 4).map((file, idx) => (
               <FileControl
@@ -137,7 +181,7 @@ export const Controls: React.FC<ControlsProps> = ({
               </div>
             )}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -175,16 +219,27 @@ const FileControl: React.FC<FileControlProps> = ({
           />
           File {idx + 1}
         </label>
-        {/* <span className="text-[10px] font-mono text-zinc-500">
-          {formatBytes(file.sizeBytes)}
-        </span> */}
-        <span className="text-[15px] font-bold text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-full">
-          File size: {formatBytes(file.sizeBytes)}
-        </span>
+        {/* <span className="text-[10px] font-mono text-zinc-500">{formatBytes(file.sizeBytes)}</span> */}
       </div>
 
-
+      {/* File Size */}
+      {/* <div className="space-y-1">
+        <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">File Size</p>
+        <input 
+          type="range" 
+          min="0" 
+          max={FILE_SIZE_STEPS.length - 1} 
+          step="1"
+          value={currentStepIdx} 
+          onChange={(e) => updateFileProperty(file.id, 'sizeBytes', FILE_SIZE_STEPS[parseInt(e.target.value)].value)}
+          className="w-full h-1.5 bg-zinc-200 rounded-lg appearance-none cursor-pointer"
+          style={{ accentColor: `hsl(${file.colorHue}, 70%, 50%)` }}
+        />
+      </div> */}
       <div className="">
+        <span className="text-[17px] font-bold text-zinc-900 py-0.5 rounded-full">
+          File size: {formatBytes(file.sizeBytes)}
+        </span>
         {/* Slider wrapper so ticks can align */}
         <div className="relative mt-4">
           {/* Slider */}
@@ -203,6 +258,7 @@ const FileControl: React.FC<FileControlProps> = ({
               )
             }
             className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-[#7c0044]"
+            style={{ accentColor: `hsl(${file.colorHue}, 70%, 50%)` }}
           />
 
           {/* Ticks */}
@@ -244,9 +300,12 @@ const FileControl: React.FC<FileControlProps> = ({
       </div>
 
       {/* Replication Factor */}
-      {/* <div className="space-y-1">
-        <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Replication Factor: {file.replicationFactor}</p>
-        <input 
+      <div className="space-y-1">
+        {/* <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Replication Factor: {file.replicationFactor}</p> */}
+        <span className="text-[17px] font-bold text-zinc-900 py-0.5 rounded-full">
+          Replication Factor
+        </span>
+        {/* <input 
           type="range" 
           min="1" 
           max="4" 
@@ -255,13 +314,46 @@ const FileControl: React.FC<FileControlProps> = ({
           onChange={(e) => updateFileProperty(file.id, 'replicationFactor', parseInt(e.target.value))}
           className="w-full h-1.5 bg-zinc-200 rounded-lg appearance-none cursor-pointer"
           style={{ accentColor: `hsl(${file.colorHue}, 70%, 50%)` }}
+        /> */}
+        <input
+          type="range"
+          min="1"
+          max="4"
+          step="1"
+          value={file.replicationFactor}
+          onChange={(e) =>
+            updateFileProperty(
+              file.id,
+              "replicationFactor",
+              parseInt(e.target.value)
+            )
+          }
+          className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-[#7c0044]"
+          style={{ accentColor: `hsl(${file.colorHue}, 70%, 50%)` }}
         />
-      </div> */}
+        <div className="flex justify-between mt-2 text-[15px] text-zinc-400 font-mono uppercase tracking-wider">
+          {Array.from({ length: 4 }).map((s, i) => (
+            <span
+              key={i}
+              className={
+                i + 1 === file.replicationFactor
+                  ? "text-zinc-900 font-bold"
+                  : ""
+              }
+            >
+              {i + 1}
+            </span>
+          ))}
+        </div>
+      </div>
 
       {/* Client Connection */}
-      {/* <div className="space-y-1">
-        <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Client Connection: DN{file.clientNodeId.split('-')[1]}</p>
-        <input 
+      <div className="space-y-1">
+        {/* <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Client Connection: DN{file.clientNodeId.split('-')[1]}</p> */}
+        <span className="text-[17px] font-bold text-zinc-900 py-0.5 rounded-full">
+          Client Connection: DN{file.clientNodeId.split("-")[1]}
+        </span>
+        {/* <input 
           type="range" 
           min="1" 
           max="10" 
@@ -270,8 +362,35 @@ const FileControl: React.FC<FileControlProps> = ({
           onChange={(e) => updateFileProperty(file.id, 'clientNodeId', `dn-${e.target.value}`)}
           className="w-full h-1.5 bg-zinc-200 rounded-lg appearance-none cursor-pointer"
           style={{ accentColor: `hsl(${file.colorHue}, 70%, 50%)` }}
+        /> */}
+        <input
+          type="range"
+          min="1"
+          max="10"
+          step="1"
+          // value={parseInt(file.clientNodeId.split('-')[1])}
+          value={Number(file.clientNodeId.split("-")[1])}
+          onChange={(e) =>
+            updateFileProperty(file.id, "clientNodeId", `dn-${e.target.value}`)
+          }
+          className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-[#7c0044]"
+          style={{ accentColor: `hsl(${file.colorHue}, 70%, 50%)` }}
         />
-      </div> */}
+        <div className="flex justify-between mt-2 text-[15px] text-zinc-400 font-mono uppercase tracking-wider">
+          {Array.from({ length: 10 }).map((s, i) => (
+            <span
+              key={i}
+              className={
+                i + 1 === Number(file.clientNodeId.split("-")[1])
+                  ? "text-zinc-900 font-bold"
+                  : ""
+              }
+            >
+              {i + 1}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

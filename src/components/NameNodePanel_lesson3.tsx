@@ -307,7 +307,7 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({
         <div className="border border-zinc-100 rounded-xl overflow-hidden">
           <button
             onClick={() => toggleSection("mapping")}
-            className="w-full flex items-center justify-between p-3 bg-zinc-50 hover:bg-zinc-100 transition-colors"
+            className="w-full flex items-center justify-between p-3 bg-zinc-50 transition-colors"
           >
             <div className="flex items-center gap-2">
               <Layers size={18} className="text-zinc-400" />
@@ -315,14 +315,14 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({
                 Block Mapping
               </span>
             </div>
-            {expandedSections.mapping ? (
+            {/* {expandedSections.mapping ? (
               <ChevronDown size={16} className="text-zinc-400" />
             ) : (
               <ChevronRight size={16} className="text-zinc-400" />
-            )}
+            )} */}
           </button>
 
-          <AnimatePresence>
+          {/* <AnimatePresence>
             {expandedSections.mapping && (
               <motion.div
                 initial={{ height: 0 }}
@@ -361,7 +361,7 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({
                 </div>
               </motion.div>
             )}
-          </AnimatePresence>
+          </AnimatePresence> */}
         </div>
 
         {/* Metadata Stats */}

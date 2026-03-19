@@ -3,6 +3,7 @@ import type { loadRenderers } from "astro:container";
 import "../styles/global.css";
 import "../styles/index.css";
 import Animation from "../components/Animation_lesson2.tsx";
+import ProgressBar from "./progressbar.astro";
 ---
 
 <html>
@@ -14,9 +15,10 @@ import Animation from "../components/Animation_lesson2.tsx";
     />
   </head>
   <body>
+    <ProgressBar step={2} total={6} />
     <h1 style="text-align: center;">Splitting up files</h1>
 
-    <p>
+    <p class="py-8">
       As the files are usually huge, they do not fit on a single machine. As a
       consequence, they have to somehow be split up into individual pieces and
       those pieces are then spread over multiple machines. What is done in HDFS
@@ -29,11 +31,7 @@ import Animation from "../components/Animation_lesson2.tsx";
       it, click on Next.
     </p>
 
-    <p>TODO: add animation</p>
-
-    <p>
-      goal: explain splitting up file using file block size + file size slider
-    </p>
+ 
 
     <Animation client:load />
     <!-- <a href="..">Back Home</a>
