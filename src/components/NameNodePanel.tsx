@@ -92,7 +92,7 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({ files, metadataSiz
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-zinc-50 p-3 rounded-xl border border-zinc-100">
               <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400 mb-1">Total Blocks</p>
-              <p className="text-lg font-bold text-zinc-900">{files.reduce((acc, f) => acc + f.blocks.length, 0)}</p>
+              <p className="text-lg font-bold text-zinc-900">{files.reduce((acc, f) => acc + f.numBlocks, 0)}</p>
             </div>
             <div className="bg-zinc-50 p-3 rounded-xl border border-zinc-100">
               <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400 mb-1">RAM Usage</p>

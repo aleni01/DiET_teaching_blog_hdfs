@@ -4,30 +4,6 @@ const { step = 0, total = 1 } = Astro.props;
 
 const percent = Math.round((step / total) * 100);
 ---
-
-<!-- <div class="progress-wrapper">
-  <div class="progress-bar">
-    <div
-      class="progress-fill"
-      style={`width: ${percent}%`}
-      
-    ></div>
-    <span class="progress-text">
-        {percent}
-    </span>
-   
-  </div> -->
-
-  <!-- <div class="progress">
-    <div class="progress-bar" role="progressbar" aria-valuenow="70"
-    aria-valuemin="0" aria-valuemax="100" style="width:70%">
-      {percent}%
-    </div>
-  </div> -->
-
-  <!-- <p class="progress-text">{percent}%</p> -->
-<!-- </div> -->
-
 <div class="progress-wrapper">
     <div class="progress-bar">
       <div

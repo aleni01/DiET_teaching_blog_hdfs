@@ -27,7 +27,7 @@ const FILE_METADATA_TEMPLATE: Record<
   { owner: string; permissions: string }
 > = {
   f1: { owner: "Alice", permissions: "rw-r--r--" },
-  f2: { owner: "Alice", permissions: "rw-------" },
+  f2: { owner: "Cloë", permissions: "rw-------" },
   f3: { owner: "System", permissions: "r--r--r--" },
   f4: { owner: "Bob", permissions: "rw-rw-r--" },
 };
@@ -185,7 +185,8 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({
                           onClick={() => toggleFile(file.id)}
                           className="w-full flex items-center justify-between p-2 hover:bg-zinc-50 transition-colors text-left"
                         >
-                          <span className="text-[15px] font-mono font-bold text-zinc-900">
+                          <span className="text-[15px] font-mono font-bold text-zinc-900"
+                          style={{ color: `hsl(${file.colorHue}, 70%, 40%)` }}>
                             {fKey}
                           </span>
                           {isExpanded ? (
@@ -240,13 +241,7 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({
                                       {formatBytes(file.sizeBytes)}
                                     </span>
                                   </div>
-                                  {/* <div className="flex items-center gap-2 text-zinc-500"> */}
-                                  {/* < size={18} /> */}
-                                    {/* <span className="text-[15px]"># Blocks:</span>
-                                    <span className="text-[15px] text-zinc-900 font-mono">
-                                      {file.blocks.length}
-                                    </span>
-                                  </div> */}
+                                
                                 </div>
 
                                 {/* Nested Blocks Toggle */}
@@ -257,7 +252,7 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({
                                   >
                                     <Layers size={18} />
                                     <span className="text-[15px] font-bold uppercase tracking-tighter">
-                                      Blocks • {file.blocks.length}
+                                      Blocks • {file.numBlocks}
                                     </span>
                                     {isBlocksExpanded ? (
                                       <ChevronDown size={14} />
@@ -275,7 +270,7 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({
                                         className="overflow-hidden"
                                       >
                                         <div className="flex flex-wrap gap-1 mt-2 p-2 bg-zinc-50 rounded-lg">
-                                          {file.blocks.map((block) => (
+                                          {file.numBlocks < 500? file.blocks.map((block) => (
                                             <div
                                               key={block.id}
                                               className="w-6 h-8 rounded-sm shadow-sm border border-black/5"
@@ -284,7 +279,7 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({
                                               }}
                                               title={`Block ${block.index}`}
                                             />
-                                          ))}
+                                          )) : <p>Too many blocks to show</p>}
                                         </div>
                                       </motion.div>
                                     )}
@@ -375,7 +370,7 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({
                 Total Blocks
               </p>
               <p className="centered-text text-lg font-bold text-zinc-900">
-                {files.reduce((acc, f) => acc + f.blocks.length, 0)}
+                {files.reduce((acc, f) => acc + f.numBlocks, 0)}
               </p>
             </div>
             <div className="bg-zinc-50 p-3 rounded-xl border border-zinc-100">

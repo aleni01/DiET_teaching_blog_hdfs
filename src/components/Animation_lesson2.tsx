@@ -3,7 +3,7 @@ import { Controls } from './Controls_lesson2';
 import { FilePanel } from './FilePanel';
 import type { FileData, RackData, DataNodeData } from '../types';
 import { BLOCK_SIZES, FILE_SIZE_STEPS, FILE_HUES, DATANODE_CAPACITY } from '../constants';
-import { generateBlocksForFile, distributeBlocks, calculateMetadataSize } from '../utils/hdfsLogic';
+import { generateBlocksForFile, distributeBlocks, calculateMetadataSize, computeNumberOfBlocksForFile } from '../utils/hdfsLogic';
 
 
 export default function App() {
@@ -31,9 +31,10 @@ export default function App() {
             name: `File ${i + 1}`,
             sizeBytes,
             colorHue: hue,
-            blocks: generateBlocksForFile(id, sizeBytes, blockSizeBytes, i),
+            blocks:[],
+            numBlocks:0,
             replicationFactor: 3,
-            clientNodeId: 'dn-1'
+            clientNodeId: 'dn-1',
           });
         }
       } 
@@ -45,7 +46,8 @@ export default function App() {
       // Re-generate blocks for all files if block size changed
       return newFiles.map((f, idx) => ({
         ...f,
-        blocks: generateBlocksForFile(f.id, f.sizeBytes, blockSizeBytes, idx)
+        blocks: generateBlocksForFile(f.id, f.sizeBytes, blockSizeBytes, idx),
+        numBlocks: computeNumberOfBlocksForFile(f.sizeBytes, blockSizeBytes),
       }));
     });
   }, [numFiles, blockSizeBytes]);
@@ -59,6 +61,7 @@ export default function App() {
         if (property === 'sizeBytes') {
           const fileIdx = prev.findIndex(pf => pf.id === fileId);
           updatedFile.blocks = generateBlocksForFile(f.id, value, blockSizeBytes, fileIdx);
+          updatedFile.numBlocks = computeNumberOfBlocksForFile(value, blockSizeBytes);
         }
         return updatedFile;
       }
@@ -73,11 +76,11 @@ export default function App() {
     // setRacks(INITIAL_RACKS);
   };
 
-  const totalBlocks = useMemo(() => files.reduce((acc, f) => acc + f.blocks.length, 0), [files]);
+  const totalBlocks = useMemo(() => files.reduce((acc, f) => acc + f.numBlocks, 0), [files]);
   const metadataSize = useMemo(() => calculateMetadataSize(totalBlocks), [totalBlocks]);
 
   return (
-    <div className="rounded-xl container mx-auto bg-[oklch(0.8335_0.026_84.59)] text-zinc-900 font-sans selection:bg-zinc-900 selection:text-white flex flex-col">
+    <div className="rounded-xl bg-[oklch(0.8335_0.026_84.59)] text-zinc-900 font-sans selection:bg-zinc-900 selection:text-white flex flex-col">
 
       <main className="p-8 max-w-[1800px] mx-auto flex-grow flex flex-col gap-8 w-full">
         {/* Bottom Section: Controls */}
@@ -86,7 +89,7 @@ export default function App() {
         {/* Top Section: 2 Columns */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow">
 
-        <div className="lg:col-span-4">
+        <div className="lg:col-span-5">
           <Controls 
             numFiles={numFiles}
             setNumFiles={setNumFiles}
@@ -101,7 +104,7 @@ export default function App() {
 
         
           {/* Right Column: Files & Blocks */}
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-7">
             <FilePanel files={files} lessonNumber={2} />
           </div>
         </div>

@@ -28,7 +28,7 @@ export const ClusterPanel: React.FC<ClusterPanelProps> = ({ racks, allBlocks, fi
         </div>
       </div>
 
-      <div className="flex-1 flex gap-2 overflow-x-auto pb-4">
+      <div className="flex-1 flex gap-2 pb-4">
         {racks.map((rack, rIdx) => (
           <div key={rack.id} className="flex-1 min-w-[180px] flex flex-col bg-zinc-50 rounded-2xl border border-zinc-100 p-4">
             <div className="flex items-center gap-2 mb-4">

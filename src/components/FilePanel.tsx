@@ -39,7 +39,7 @@ export const FilePanel: React.FC<FilePanelProps> = ({
                   )}
                   {lessonNumber == 0 && (
                     <p className="text-[10px] text-zinc-400 font-mono uppercase tracking-wider">
-                      {formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}
+                      {formatBytes(file.sizeBytes)} • {file.numBlocks}{" "}
                       Blocks
                     </p>
                   )}
@@ -55,7 +55,7 @@ export const FilePanel: React.FC<FilePanelProps> = ({
                       {/* <div className="w-2 h-2 rounded-full" style={{ backgroundColor: `hsl(${file.colorHue}, 70%, 50%)` }} /> */}
                       {/* File {idx + 1} */}
                       <span className="text-[15px] font-bold text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-full tracking-wider">
-                        {formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}
+                        {formatBytes(file.sizeBytes)} • {file.numBlocks}{" "}
                         Blocks
                       </span>
                     </label>
@@ -72,7 +72,7 @@ export const FilePanel: React.FC<FilePanelProps> = ({
                       {/* <div className="w-2 h-2 rounded-full" style={{ backgroundColor: `hsl(${file.colorHue}, 70%, 50%)` }} /> */}
                       {/* File {idx + 1} */}
                       <span className="text-[15px] font-bold text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-full tracking-wider">
-                        {formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}
+                        {formatBytes(file.sizeBytes)} • {file.numBlocks}{" "}
                         Blocks
                       </span>
                     </label>
@@ -90,7 +90,7 @@ export const FilePanel: React.FC<FilePanelProps> = ({
                       {/* <div className="w-2 h-2 rounded-full" style={{ backgroundColor: `hsl(${file.colorHue}, 70%, 50%)` }} /> */}
                       {/* File {idx + 1} */}
                       <span className="text-[15px] font-bold text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-full tracking-wider">
-                        {formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}
+                        {formatBytes(file.sizeBytes)} • {file.numBlocks}{" "}
                         Blocks
                       </span>
                     </label>
@@ -110,7 +110,7 @@ export const FilePanel: React.FC<FilePanelProps> = ({
                     animate={{ scale: 1 }}
                   />
                 ))}
-                {file.blocks.length === 0 && (
+                {file.numBlocks === 0 && (
                   <div className="w-full flex items-center justify-center text-[10px] text-zinc-300 italic">
                     No blocks
                   </div>

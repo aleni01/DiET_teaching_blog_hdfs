@@ -17,6 +17,14 @@ export const FILE_SIZE_STEPS = [
   { label: '1 TB', value: 1024 * 1024 * 1024 * 1024 },
 ];
 
+export const FILE_SIZE_STEPS_SMALL = [
+  { label: '1 GB', value: 1024 * 1024 * 1024 },
+  { label: '2.5 GB', value: 2.5 * 1024 * 1024 * 1024 },
+  { label: '5 GB', value: 5 * 1024 * 1024 * 1024 },
+  { label: '7.5 GB', value: 7.5 * 1024 * 1024 * 1024 },
+  { label: '10 GB', value: 10 * 1024 * 1024 * 1024 },
+]
+
 export const METADATA_PER_BLOCK = 150; // bytes
 export const DATANODE_CAPACITY = 100; // max blocks per DN
 

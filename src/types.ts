@@ -8,6 +8,7 @@ export interface FileData {
   blocks: BlockData[];
   replicationFactor: number;
   clientNodeId: string;
+  numBlocks: number;
 }
 
 export interface ReplicaPlacement {

@@ -88,5 +88,25 @@ export function placeReplicasForBlock(
     }
   }
 
+  // Final Fallback: If replication factor not met, ignore "one replica per node" rule
+  // "when any of r1, r2, r3, r4 cannot be assured, but there is still a datanode which has some capacity left, 
+  // then just put any remaining block that has not reached the required replication factor on the datanode 
+  // until no single datanode has any space left"
+  while (placements.length < replicationFactor) {
+    let placed = false;
+    for (const rack of racks) {
+      for (const dn of rack.dataNodes) {
+        if (dn.blocks.length < DATANODE_CAPACITY) {
+          placements.push({ dataNodeId: dn.id, replicaIndex: placements.length + 1 });
+          dn.blocks.push(blockId);
+          placed = true;
+          if (placements.length === replicationFactor) break;
+        }
+      }
+      if (placements.length === replicationFactor) break;
+    }
+    if (!placed) break; // No space left in any DataNode
+  }
+
   return placements;
 }

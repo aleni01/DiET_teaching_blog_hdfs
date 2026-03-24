@@ -4,42 +4,82 @@ import "../styles/index.css";
 import ProgressBar from "./progressbar.astro";
 ---
 
-<!-- <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html> -->
-
-
 <html>
-	<head>
-		<link rel="icon" type="image/png" href="/DiET_teaching_blog_hdfs//favicon-h.png"/>
-	  </head>
+  <head>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/DiET_teaching_blog_hdfs//favicon-h.png"
+    />
+  </head>
   <body>
-	<ProgressBar step={0} total={6} />
-    <h1 style="text-align: center;">HDFS Interactive Learning Blog</h1>
-    <p>Welcome to my course project. In this blog you will learn what HDFS is and what it is used for, how the block size influences storage requirements and how blocks are stored. Click on next to start the journey!</p>
+    <!-- <ProgressBar step={0} total={6} /> -->
+    <h1 style="text-align: center;">HDFS</h1>
+    <!-- <p>Welcome to my course project. In this blog you will learn what HDFS is and what it is used for, how the block size influences storage requirements and how blocks are stored. Click on next to start the journey!</p> -->
+    <!-- <p class="max-w-[1000px] mx-auto">
+      Imagine you are a researcher whose goal is to create a map of the entire
+      seabed, including all the plants and marine animals, and show how it has
+      changed over time. To accomplish this, you travel around the sea every
+      day, filming the seabed and documenting all the marine life you encounter.
+      You accumulate enormous amounts of data, reaching hundreds of gigabytes
+      per day. To avoid losing this data, you must store it somewhere. How would
+      you do that? What would you use?
+    </p>
+    <p class="max-w-[1000px] mx-auto">
+      One possible solution is to use HDFS. This blog provides an overview of
+      HDFS and explains how design decisions regarding block size and storage
+      were made.  -->
+    <!-- Click Next to start exploring. -->
+    <!-- </p> -->
 
-	<!-- <p>Goals: introduce what this website is about and what are its goals</p> -->
-
-    <!-- <a href="lesson1/">Next</a> -->
-	<div class="flex justify-center gap-4 mt-6">
-
-          <a href="lesson1/" class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2">
-            Next
-          </a>
+    <div class="grid grid-cols-3 gap-8">
+      <div class="col-span-1 py-8">
+        <!-- <p class="max-w-[1000px] mx-auto">
+          Imagine you are a researcher whose goal is to create a map of the
+          entire seabed, including all the plants and marine animals, and show
+          how it has changed over time. To accomplish this, you travel around
+          the sea every day, filming the seabed and documenting all the marine
+          life you encounter. You accumulate enormous amounts of data, reaching
+          hundreds of gigabytes per day. To avoid losing this data, you must
+          store it somewhere. How would you do that? What would you use?
+        </p>
+        <p class="max-w-[1000px] mx-auto">
+          One possible solution is to use HDFS. This blog provides an overview
+          of HDFS and explains how design decisions regarding block size and
+          storage were made.
           
-	</div>
-	
+        </p> -->
+        <p class="py-5">
+          HDFS stands for Hadoop distributed file systems and is a data center
+          that is used to store large amount data and files that are too big to
+          store on a single machine. These files are typically in the GB to TB
+          range. <br>
+          HDFS's architecture is centralized and consists of a Master
+          Node, named the NameNode, and thousands of DataNodes. The NameNode
+          keeps track how files are split up and where the pieces are stored.
+          The DataNodes store the individual data blocks. Multiple DataNodes are
+          stacked on top of each other in a rack, and the racks form the data
+          center. <br>
+          Go to the next page to see how files are split up.
+        </p>
+      </div>
+      <div class="col-span-2 py-12">
+        <img
+          src="../public/architecture.png"
+          class="center"
+          alt="The architecture of HDFS"
+        />
+      </div>
+    </div>
 
-
+    <!-- Reference to next page -->
+    <div class="flex justify-center gap-4 mt-6">
+      <a
+        href="lesson2/"
+        class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2"
+      >
+        Next
+      </a>
+    </div>
   </body>
 </html>

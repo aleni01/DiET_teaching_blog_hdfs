@@ -12,9 +12,9 @@ body {
   }
 
   p {
-    padding-left: 150px;
-    padding-right: 150px;
-    margin: auto;
+    /* padding-left: 5%; 200 px for left and right */
+    /* padding-right: 5%; */
+    /* margin: auto; */
     text-align: justify;
   }
 
@@ -72,5 +72,5 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 75%;
+    width: 95%;
   }

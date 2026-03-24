@@ -1,6 +1,6 @@
 import type { FileData, BlockData, RackData, DataNodeData, ReplicaPlacement } from '../types';
 import { DATANODE_CAPACITY, METADATA_PER_BLOCK } from '../constants';
-import { placeReplicasForBlock } from './placementPolicy';
+import { distributeReplicasFairly } from './placementPolicy_new';
 
 export function formatBytes(bytes: number): string {
   if (bytes === 0) return '0 Bytes';
@@ -17,11 +17,8 @@ export function distributeBlocks(files: FileData[], racks: RackData[]): RackData
     dataNodes: rack.dataNodes.map(dn => ({ ...dn, blocks: [] }))
   }));
 
-  files.forEach(file => {
-    file.blocks.forEach(block => {
-      block.replicas = placeReplicasForBlock(block.id, file.replicationFactor, newRacks, file.clientNodeId);
-    });
-  });
+  // Perform fair, layered distribution of all replicas
+  distributeReplicasFairly(files, newRacks);
 
   return newRacks;
 }
@@ -52,10 +49,6 @@ export function generateBlocksForFile(fileId: string, fileSize: number, blockSiz
   const numBlocks = Math.ceil(fileSize / blockSize);
   const blocks: BlockData[] = [];
 
-  // if (numBlocks > 1000) {
-  //   throw new Error("Too many blocks for file " + fileId)
-  // }
-
   for (let i = 0; i < Math.min(numBlocks,1024); i++) {
     blocks.push({
       id: `${fileId}-b${i}`,
@@ -69,8 +62,9 @@ export function generateBlocksForFile(fileId: string, fileSize: number, blockSiz
   return blocks;
 }
 
+
 export function computeNumberOfBlocksForFile(fileSize: number, blockSize: number): number {
-  const numBlocks = Math.ceil(fileSize / blockSize);
-  console.log(numBlocks)
-  return numBlocks;
-}
+    const numBlocks = Math.ceil(fileSize / blockSize);
+    console.log(numBlocks)
+    return numBlocks;
+  }

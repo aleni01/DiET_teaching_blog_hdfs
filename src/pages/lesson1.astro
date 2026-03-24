@@ -1,62 +1,54 @@
 ---
-import type { loadRenderers } from "astro:container";
 import "../styles/global.css";
-import Quiz from "../components/quiz.jsx"
 import "../styles/index.css";
 import ProgressBar from "./progressbar.astro";
 ---
 
 <html>
   <head>
-		<link rel="icon" type="image/png" href="/DiET_teaching_blog_hdfs//favicon-h.png"/>
-	  </head>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/DiET_teaching_blog_hdfs//favicon-h.png"
+    />
+  </head>
   <body>
-    <ProgressBar step={1} total={6} />
+    <ProgressBar step={1} total={5} />
     <h1 style="text-align: center;">HDFS</h1>
 
-    <p class="py-8">HDFS stands for Hadoop distributed file systems and is a datacenter that is used to store data and files that are too big to store them on a single machine. Those files typically are of sizes in GB to TB range. The architecture of HDFS is centralized, consisting of a Master Node named NameNode and thousands of DataNodes. The NameNode is responsible for keeping track how files are splitted up and where the individual pieces of it are stored. The DataNodes store the individual data blocks. Multiple DataNodes are stacked on each other in a so-called rack and the racks form the datacenter. Click on Next to see how files are splitted up.</p>
+    <p class="py-8">
+      HDFS stands for Hadoop distributed file systems and is a data center that
+      is used to store large amount data and files that are too big to store on
+      a single machine. These files are typically in the GB to TB range. HDFS's
+      architecture is centralized and consists of a Master Node, named the
+      NameNode, and thousands of DataNodes. The NameNode keeps track how files
+      are split up and where the pieces are stored. The DataNodes store the
+      individual data blocks. Multiple DataNodes are stacked on top of each
+      other in a rack, and the racks form the data center. Click Next to see how
+      files are split up.
+    </p>
 
-    <p>TODO:füge ein bild ein wie so ein datacenter aufgebaut ist mit DataNodes und NameNodes</p>
+    <img
+      src="../public/architecture.png"
+      class="center"
+      alt="The architecture of HDFS"
+    />
 
-    <p>goal: explain what is HDFS</p>
-
-    <img src="../public/architecture.png" class="center" alt="The architecture of HDFS" />   
-
-    <!-- <p>This lesson explains the basics of HDFS.</p>
-
-    <p> Let's try a quiz</p>
-
-    <Quiz
-    client:load 
-    question="Which node stores metadata in HDFS?"
-    options={["NameNode", "DataNode", "Client"]}
-    correct="NameNode"
-    explanations = {{
-      "NameNode": {
-          text: "The NameNode is responsible for metadata like directory structure and file locations"
-      },
-      "DataNode": {
-          text: "Hallo"
-      },
-      "Client": {
-        text: "Answer 3"
-      }
-    }}/> -->
-
-    <!-- <a href="..">Back Home</a>
-    <a href="../lesson2/">Next</a> -->
-
+    <!-- References to previous and next page -->
     <div class="flex justify-center gap-4 mt-6">
-      <a href=".." class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)]">
-          Back Home
-        </a>
-        
+      <a
+        href=".."
+        class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)]"
+      >
+        Back Home
+      </a>
 
-        <a href="../lesson2/" class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2">
-          Next
-        </a>
-        
-        </div>
-    
+      <a
+        href="../lesson2/"
+        class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2"
+      >
+        Next
+      </a>
+    </div>
   </body>
 </html>

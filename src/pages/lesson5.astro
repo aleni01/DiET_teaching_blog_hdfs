@@ -1,40 +1,56 @@
 ---
-import type { loadRenderers } from "astro:container";
 import "../styles/global.css";
 import "../styles/index.css";
 import Animation from "../components/Animation_lesson5.tsx";
 import ProgressBar from "./progressbar.astro";
 ---
 
-
 <html>
-    <head>
-		<link rel="icon" type="image/png" href="/DiET_teaching_blog_hdfs//favicon-h.png"/>
-	  </head>
+  <head>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/DiET_teaching_blog_hdfs//favicon-h.png"
+    />
+  </head>
   <body>
-    <ProgressBar step={5} total={6} />
-<h1 style="text-align: center;">HDFS block storage animation</h1>
-<p class="py-8">You have seen what HDFS is, for what it is used for and how a file is split up in blocks and how those are then stored on the DataNodes. Below you see the full animation, where you can select how many files you want to store, to which DataNode you connect to and how the storages looks like and where the blocks are placed. You can now try different scenarios and see what happens.</p>
+    <ProgressBar step={4} total={4} />
+    <h1 style="text-align: center;">HDFS block storage animation</h1>
+    <p class="py-8 max-w-[1000px] mx-auto">
+      You have seen what HDFS is, how it is used, how files are
+      split into blocks, and how those blocks are stored on the DataNodes. Below,
+      you will see the full animation, where you can select how many files you want
+      to store, which DataNode to connect to, and what storage looks like
+      and where the blocks are placed. Now, try different scenarios and
+      see what happens. <br>
+      The only new feature is the block mapping inside the NameNode, which shows where the replicas of all the blocks are stored for each file.
+      <!-- Click Next to finish. -->
+    </p>
 
-<!-- <p>goal: whole animation to play</p> -->
+    <Animation client:load />
 
-
-<Animation client:load/>
-    <!-- <a href="..">Back Home</a>
-    <a href="../lesson4/">Go to previous lesson</a> -->
+    <!-- References to previous and next page -->
     <div class="flex justify-center gap-4 mt-6">
-    <a href=".." class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2">
+      <a
+        href=".."
+        class="px-4 py-2 text-[oklch(0.3816_0.1558_356.93)] rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] border-2 border-[oklch(0.3816_0.1558_356.93)]"
+      >
         Back Home
       </a>
-      
-      <a href="../lesson4/" class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2">
+
+      <a
+        href="../lesson4/"
+        class="px-4 py-2 text-[oklch(0.3816_0.1558_356.93)] rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] border-2 border-[oklch(0.3816_0.1558_356.93)]"
+      >
         Previous
       </a>
 
-      <a href="../lesson6/" class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2">
+      <!-- <a
+        href="../lesson6/"
+        class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] border-2 border-[oklch(0.3816_0.1558_356.93)]"
+      >
         Next
-      </a>
-      
-      </div>
+      </a> -->
+    </div>
   </body>
 </html>

@@ -1,9 +1,9 @@
 ---
-import type { loadRenderers } from "astro:container";
 import "../styles/global.css";
 import "../styles/index.css";
 import Animation from "../components/Animation_lesson2.tsx";
 import ProgressBar from "./progressbar.astro";
+import {Play} from "lucide-react";
 ---
 
 <html>
@@ -15,47 +15,53 @@ import ProgressBar from "./progressbar.astro";
     />
   </head>
   <body>
-    <ProgressBar step={2} total={6} />
+    <ProgressBar step={1} total={4} />
     <h1 style="text-align: center;">Splitting up files</h1>
 
-    <p class="py-8">
-      As the files are usually huge, they do not fit on a single machine. As a
-      consequence, they have to somehow be split up into individual pieces and
-      those pieces are then spread over multiple machines. What is done in HDFS
-      is, that the files are splitted up into equal-sized blocks. If the file
-      size does not correspond to a multiple of the selected block size, then
-      the remaining part is stored exactly at the size that it remains without
-      padding. Use the slider below to select a file size and then play around
-      with the block size. Try to understand the influence of the block size.
-      How many blocks will a file be splitted up to? Once you have a feeling for
-      it, click on Next.
-    </p>
+      <div class="grid grid-cols-3 gap-8 py-8">
+      
+        <div class="col-span-1 ">   <p class="mb-4">
+          Since the files are usually huge, they do not fit on a single machine. Consequently, they must be split into smaller pieces and distributed across multiple machines. In HDFS, blocks are split into equal-sized pieces. If the file size does not correspond to a multiple of the selected block size, the remaining part is stored in a separate block at its original size without padding. <br> 
+          
+          <!-- Once you have a sense of it, click Next. -->
 
- 
+        </p>  
+        <p class="py-4  bg-[oklch(0.8335_0.026_84.59)] rounded-xl text-[oklch(0.3816_0.1558_356.93)] px-4">
+          <Play size={18} className="inline text-[oklch(0.3816_0.1558_356.93)] fill-[oklch(0.3816_0.1558_356.93)]"/> Use the slider to select a file size, then experiment with the block size. 
+          How many blocks will a file be split into? <br>
+        
+        </p>
+          <p class="mt-4">Next, let's explore how block size influences the various components of the HDFS architecture. <p/></div>
+     
 
-    <Animation client:load />
-    <!-- <a href="..">Back Home</a>
-    <a href="../lesson1/">Previous</a>
-    <a href="../lesson3/">Next</a> -->
+        <div class="col-span-2">
 
+          <Animation client:load />
+        </div>
+    
+      </div>
+   
+   
+
+    <!-- References to previous and next page -->
     <div class="flex justify-center gap-4 mt-6">
       <a
         href=".."
-        class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)]"
+        class="px-4 py-2 text-[oklch(0.3816_0.1558_356.93)] rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] border-2 border-[oklch(0.3816_0.1558_356.93)]"
       >
         Back Home
       </a>
-
+<!-- 
       <a
         href="../lesson1/"
-        class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2"
+        class="px-4 py-2 text-[oklch(0.3816_0.1558_356.93)] rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] border-2 border-[oklch(0.3816_0.1558_356.93)]"
       >
         Previous
-      </a>
+      </a> -->
 
       <a
         href="../lesson3/"
-        class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2"
+        class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] border-2 border-[oklch(0.3816_0.1558_356.93)]"
       >
         Next
       </a>

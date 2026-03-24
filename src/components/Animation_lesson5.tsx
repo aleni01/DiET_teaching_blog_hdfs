@@ -5,7 +5,7 @@ import { NameNodePanel } from './NameNodePanel_new';
 import { ClusterPanel } from './ClusterPanel';
 import type { FileData, RackData, DataNodeData } from '../types';
 import { BLOCK_SIZES, FILE_SIZE_STEPS, FILE_HUES, DATANODE_CAPACITY } from '../constants';
-import { generateBlocksForFile, distributeBlocks, calculateMetadataSize } from '../utils/hdfsLogic';
+import { generateBlocksForFile, distributeBlocks, calculateMetadataSize, computeNumberOfBlocksForFile } from '../utils/hdfsLogic';
 
 const INITIAL_RACKS: RackData[] = [
   {
@@ -46,7 +46,6 @@ export default function App() {
 
   // Initialize or update files when numFiles or blockSize changes
   useEffect(() => {
-    console.log("init files");
     setFiles(prev => {
       const newFiles = [...prev];
       
@@ -61,7 +60,8 @@ export default function App() {
             name: `File ${i + 1}`,
             sizeBytes,
             colorHue: hue,
-            blocks: generateBlocksForFile(id, sizeBytes, blockSizeBytes, i),
+            blocks: [],
+            numBlocks: 0,
             replicationFactor: 3,
             clientNodeId: 'dn-1'
           });
@@ -75,7 +75,8 @@ export default function App() {
       // Re-generate blocks for all files if block size changed
       return newFiles.map((f, idx) => ({
         ...f,
-        blocks: generateBlocksForFile(f.id, f.sizeBytes, blockSizeBytes, idx)
+        blocks: generateBlocksForFile(f.id, f.sizeBytes, blockSizeBytes, idx),
+        numBlocks: computeNumberOfBlocksForFile(f.sizeBytes, blockSizeBytes),
       }));
     });
   }, [numFiles, blockSizeBytes]);
@@ -92,6 +93,7 @@ export default function App() {
         if (property === 'sizeBytes') {
           const fileIdx = prev.findIndex(pf => pf.id === fileId);
           updatedFile.blocks = generateBlocksForFile(f.id, value, blockSizeBytes, fileIdx);
+          updatedFile.numBlocks = computeNumberOfBlocksForFile(value, blockSizeBytes);
         }
         return updatedFile;
       }
@@ -106,7 +108,7 @@ export default function App() {
     setRacks(INITIAL_RACKS);
   };
 
-  const totalBlocks = useMemo(() => files.reduce((acc, f) => acc + f.blocks.length, 0), [files]);
+  const totalBlocks = useMemo(() => files.reduce((acc, f) => acc + f.numBlocks, 0), [files]);
   const metadataSize = useMemo(() => calculateMetadataSize(totalBlocks), [totalBlocks]);
 
   return (

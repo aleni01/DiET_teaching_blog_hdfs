@@ -1,48 +1,106 @@
 ---
-import type { loadRenderers } from "astro:container";
 import "../styles/global.css";
 import "../styles/index.css";
 import Animation from "../components/Animation_lesson4.tsx";
 import ProgressBar from "./progressbar.astro";
+import Lesson4Component from "../components/Lesson4.tsx";
 ---
 
-
 <html>
-    <head>
-		<link rel="icon" type="image/png" href="/DiET_teaching_blog_hdfs//favicon-h.png"/>
-	  </head>
+  <head>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/DiET_teaching_blog_hdfs//favicon-h.png"
+    />
+  </head>
   <body>
-    <ProgressBar step={4} total={6} />
-<h1 style="text-align: center;">DataNodes and the replication strategy</h1>
+    <ProgressBar step={3} total={4} />
+    <h1 style="text-align: center;">DataNodes and the replication strategy</h1>
 
-<p class="py-8">The DataNodes are responsible for storing the individual data blocks of the files. If a client wants to store its data on HDFS, it sends a request to the NameNode and the NameNode then tells the client on which DataNodes to store the data. The DataNode itself also has some metadata where it keeps track of which blocks it has stored. Again, regarding to this it seems to be good to select a big block size, so that the DataNode has less to store. But the individual blocks of data are usually not only stored once on the DataNodes, but multiple times to ensure that if a DataNodes does not work anymore or a block is corrupted, there still exists other copies which you can rely on. The default replication factor is 3, meaning that each block is stored in total 3 times. If a data block has not enough replicas anymore because of corruption for example, then the block is replicated again somewhere to make sure that replication strategy is fulfilled. Therefore imagine having lost a block of a big size. It would be very costly to replicate it. Therefore, you get the tradeoff why we do not want a too small block size, but also not a too large one.
-Select on the slider to which DataNode you want to connect to and then look where the individual blocks are stored. Then use the replication slider to investigate where the copies are stored. Can you find some rules?</p>
+    <Lesson4Component client:load />
 
-<!-- TODO: add animation -->
+    <!-- <div class="grid grid-cols-3 gap-8 py-8">
+      <div class="col-span-1">
+        <p class="py-8">
+          The DataNodes are responsible for storing the individual data blocks
+          of the files. If a client wants to store its data on HDFS, it sends a
+          request to the NameNode and the NameNode then tells the client on
+          which DataNodes to store the data. The DataNode itself also has some
+          metadata where it keeps track of which blocks it has stored. <br>
+          
+          Change
+          the client connection slider to change to which DataNode the client is
+          directed to write his data. <br />
 
-<p class="py-8">In fact, there are some rules the replication is done. The first block is stored to the DataNode the client is connected to. The second replica is stored on a DataNode that sits on a different rack. The third replica is stored on the same rack as the second replica, but on a different DataNode. From the fourth replica on, there are two main goals. There should be at most one replica on a DataNode and there should be at most two DataNodes per rack that store that specific block. Of course, these cannot always be fulfilled.</p>
+          Now adapt the file size to see how this influences how DataNodes are filled
+          up. 
+          
+          This animation is simplified, as all blocks are filled into at the same
+          time and just fill up the DataNode the client is connected to and afterwards
+          continue with the next DataNode, but in reality for each block a client
+          wants to write, it would need to request at the NameNode to which DataNode
+          it should connect to.<br />
 
-<!-- <p>goal: explain how blocks are put on datanodes based on where you put client + replica factor rules</p> -->
+          Adapt the block size to see how this changes the amount of blocks stored.
 
 
-<Animation client:load/>
-    <!-- <a href="..">Back Home</a>
-    <a href="../lesson3/">Previous</a>
-    <a href="../lesson5/">Next</a> -->
+          Until now, it seems quite useful to just select a big file size, so that
+          the NameNode and the DataNode has to store less data. But this is not quite
+          what is done in reality. The problem is that DataNodes can stop to work
+          or the individual data blocks can get corrupted, and therefore you want
+          to store the blocks multiple times to be sure that there is always a replica
+          that is avlailable and not corrupted. 
+          
+          Change the replication factor to see
+          how blocks are replicated across the data center. <br />
 
+          As you can see, the data blocks seems to be replicated according to some
+          specific rules. The first replica is stored on the DataNode the client is
+          connected to, the second rreplica is stored on a DataNode that is on another
+          rack and the third replica is stored on the same rack as the second replica,
+          but on a different DataNode. From the fourth replica on, the NameNode tries
+          to follow two guidelines, namely to not store two replicas on the same DataNode
+          and to store replicas on at most two DataNodes of a rack.<br />
+          The problem is that if a data block is corrupted or lost, we need to replicate
+          it over the data center. And therefore it would be quite good if the amount
+          of lost data is kept small. This is the reason why the selected block size
+          is 128 MB and not a bigger one. <br />
+
+          Now change the number of files to two and experiment with different settings
+          for the two files together to see how the system behaves. 
+        </p>
+
+ 
+      </div> -->
+
+      <!-- <div class="col-span-2">
+        <Animation client:load />
+      </div>
+    </div> -->
+
+    <!-- References to previous and enxt page -->
     <div class="flex justify-center gap-4 mt-6">
-        <a href=".." class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2">
-            Back Home
-          </a>
-          
-          <a href="../lesson3/" class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2">
-            Previous
-          </a>
+      <a
+        href=".."
+        class="px-4 py-2 text-[oklch(0.3816_0.1558_356.93)] rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] border-2 border-[oklch(0.3816_0.1558_356.93)]"
+      >
+        Back Home
+      </a>
 
-          <a href="../lesson5/" class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2">
-            Next
-          </a>
-          
-          </div>
+      <a
+        href="../lesson3/"
+        class="px-4 py-2 text-[oklch(0.3816_0.1558_356.93)] rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] border-2 border-[oklch(0.3816_0.1558_356.93)]"
+      >
+        Previous
+      </a>
+
+      <a
+        href="../lesson5/"
+        class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] border-2 border-[oklch(0.3816_0.1558_356.93)]"
+      >
+        Next
+      </a>
+    </div>
   </body>
 </html>

@@ -1,47 +1,79 @@
 ---
-import type { loadRenderers } from "astro:container";
 import "../styles/global.css";
 import "../styles/index.css";
 import Animation from "../components/Animation_lesson3.tsx";
 import ProgressBar from "./progressbar.astro";
+import { Play } from "lucide-react";
+import Lesson3Component from "../components/Lesson3.tsx";
 ---
 
-
 <html>
-    <head>
-		<link rel="icon" type="image/png" href="/DiET_teaching_blog_hdfs//favicon-h.png"/>
-	  </head>
+  <head>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/DiET_teaching_blog_hdfs//favicon-h.png"
+    />
+  </head>
   <body>
-    <ProgressBar step={3} total={6} />
-<h1 style="text-align: center;">NameNode</h1>
+    <ProgressBar step={2} total={4} />
+    <h1 style="text-align: center;">NameNode</h1>
 
-<p class="py-8">Now that you know how the block size influences in how many blocks a file is split up, let's try to understand what this implies for the individual parts of the HDFS architecture. The NameNode's role is to coordinate and to take care of the logistics regarding to where all individual blocks are stored. It is responsible for storing three different things in his memory. The first thing is that it stores the namespace tree for keeping track how the hierarchy between the individual files look like. This resembles a lot the local filesystem. The second thing that it stores is the mapping from the file to its individual blocks. And here comes into play the block size you selected before. The last thing that the NameNode stores are the mappings from Blocks to which DataNodes they are stored on. Again, select a block size and see how the memory of the NameNode changes.
+    <Lesson3Component client:load />
 
-TODO: add animation NameNode, file size + block split up
+    <!-- <p class="py-8">
+      Now that you know in how many blocks a file is split up based on the
+      selected block size, let's explore what this means for the different parts
+      of the HDFS architecture. <br />
+      The NameNode acts as a coordinator and must store three types of informations.
+      First, it stores the namespace tree. Open the "NameSpace" toggle in the NameNode
+      panel to see how the file namespace is stored. As you can see, it has a tree-like
+      structure that keeps track of which files belong to which user. Then, open the
+      "File Metadata" toggle and open the individual toggles for the four files. You
+      will see that it also stores metadata about the individual files.<br />
+      The second task of the NameNode is to store a mapping between the file and the
+      blocks into which it was split. Go to the "File Metadata" toggle again, and
+      click on the "Blocks" toggle in each file. There, you can see the mapping that
+      is done. You will also see how many blocks are stored for each file size based
+      on the block size. <br />
+      Start changing the block size, selecting different sizes for each file, and
+      observe how keeping track of the blocks changes. The total number of blocks
+      that the NameNode must keep track of is shown in the metadata statistics at
+      the bottom of the NameNode panel. As you can see, the number of blocks increases
+      significantly if you select a small block size. The storage usage shown in the
+      bottom right corner of the NameNode panel shows how much memory is required
+      to store all this information. In this example, it is still low because we are
+      only dealing with four files. However, imagine if this system had to store millions
+      of files; this number would get be quite big. <br />
+      The last thing that the NameNode has to track is the block mapping. This means
+      it has to track on which DataNodes the blocks are stored on. Click Next to explore
+      this.
+    </p>
 
-As you can see, if you select a smaller block size, the NameNode has to store many more mappings than with a bigger block size. Therefore, it seems to be better to use a big block size, no? Let's go to the next part</p>
+    <Animation client:load /> -->
 
-<!-- <p>goal:explain how block size influences NameNode</p> -->
-
-
-<Animation client:load/>
-    <!-- <a href="..">Back Home</a>
-    <a href="../lesson2/">Previous</a>
-    <a href="../lesson4/">Next</a> -->
-
+    <!-- References to previous and next page -->
     <div class="flex justify-center gap-4 mt-6">
-        <a href=".." class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)]">
-            Back Home
-          </a>
-          
-          <a href="../lesson2/" class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2">
-            Previous
-          </a>
+      <a
+        href=".."
+        class="px-4 py-2 text-[oklch(0.3816_0.1558_356.93)] rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] border-2 border-[oklch(0.3816_0.1558_356.93)]"
+      >
+        Back Home
+      </a>
 
-          <a href="../lesson4/" class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] ml-2">
-            Next
-          </a>
-          
-          </div>
+      <a
+        href="../lesson2/"
+        class="px-4 py-2 text-[oklch(0.3816_0.1558_356.93)] rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] border-2 border-[oklch(0.3816_0.1558_356.93)]"
+      >
+        Previous
+      </a>
+
+      <a
+        href="../lesson4/"
+        class="px-4 py-2 bg-[oklch(0.3816_0.1558_356.93)] text-white rounded-lg hover:bg-[oklch(0.6831_0.1558_356.93)] border-2 border-[oklch(0.3816_0.1558_356.93)]"
+      >
+        Next
+      </a>
+    </div>
   </body>
 </html>

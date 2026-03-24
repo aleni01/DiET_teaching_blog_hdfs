@@ -1,5 +1,5 @@
-import React from 'react';
-import { BLOCK_SIZES, FILE_SIZE_STEPS } from '../constants';
+import React, {useEffect, useState} from 'react';
+import { BLOCK_SIZES, FILE_SIZE_STEPS, FILE_SIZE_STEPS_SMALL } from '../constants';
 import { formatBytes } from '../utils/hdfsLogic';
 import type { FileData } from '../types';
 import { RotateCcw, Info } from 'lucide-react';
@@ -23,6 +23,14 @@ export const Controls: React.FC<ControlsProps> = ({
   updateFileProperty,
   onReset
 }) => {
+
+  const [showWarning, setShowWarning] = useState(false);
+  useEffect(() => {
+    const totalNumBlocks = files.reduce((acc, file) => acc + file.numBlocks*file.replicationFactor, 0);
+
+    setShowWarning(totalNumBlocks>1000);
+  }, [files])
+
   return (
     <div className="bg-white p-6 rounded-2xl shadow-sm border border-black/5 space-y-6">
       {/* <div className="flex items-center justify-between border-b border-zinc-100 pb-4">
@@ -69,7 +77,7 @@ export const Controls: React.FC<ControlsProps> = ({
               </h2>
               <input 
                 type="range" 
-                min="0" 
+                min="2" 
                 max={BLOCK_SIZES.length - 1} 
                 step="1"
                 value={blockSizeIdx} 
@@ -77,11 +85,36 @@ export const Controls: React.FC<ControlsProps> = ({
                 className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-[#7c0044]"
               />
               <div className="flex justify-between mt-2 text-[15px] text-zinc-400 font-mono uppercase tracking-wider">
-                {BLOCK_SIZES.map((s, i) => (
-                  <span key={i} className={i === blockSizeIdx ? 'text-zinc-900 font-bold' : ''}>{s.label}</span>
+                {BLOCK_SIZES.slice(2,5).map((s, i) => (
+                  <span key={i} className={i === blockSizeIdx-2 ? 'text-zinc-900 font-bold' : ''}>{s.label}</span>
                 ))}
               </div>
             </div>
+
+            <div className="py-20">
+
+             {/* {showWarning && (
+              <div className="py-4 text-[25px] bg-yellow-300 text-red-800 border-4 border-yellow-500 animate-pulse rounded-xl px-3">
+              <p className="font-semibold"> ⚠️ Your selected configuration needs more space than its currently available! Please reduce either the replication factor or the file size, or increase the block size. </p>
+            </div>)} */}
+
+            {/* <p className="py-10"></p> */}
+
+            {showWarning && (
+              <div className="py-4 text-[25px] bg-red-800 text-white border-4 border-yellow-400 animate-pulse rounded-xl px-3">
+              <p className="font-semibold"> ⚠️ Your selected configuration needs more space than its currently available! Please reduce either the replication factor, the file size, or increase the block size. </p>
+            </div>)}
+            </div>
+
+            {/* {showWarning && (
+  <div className="py-20 text-[30px] bg-yellow-200 text-yellow-900 border-l-8 border-yellow-500 animate-pulse rounded-xl shadow-lg">
+    <p className="font-semibold">
+      ⚠️ Your selected configuration needs more space than currently available!
+      Please reduce either the replication factor or the file size, or increase
+      the block size.
+    </p>
+  </div>
+)} */}
           </div>
         </div>
 
@@ -121,7 +154,7 @@ interface FileControlProps {
 }
 
 const FileControl: React.FC<FileControlProps> = ({ file, idx, updateFileProperty }) => {
-  const currentStepIdx = FILE_SIZE_STEPS.findIndex(s => s.value === file.sizeBytes);
+  const currentStepIdx = FILE_SIZE_STEPS_SMALL.findIndex(s => s.value === file.sizeBytes);
   
   return (
     <div className="space-y-4 p-4 bg-zinc-50 rounded-xl border border-zinc-100">
@@ -158,7 +191,7 @@ const FileControl: React.FC<FileControlProps> = ({ file, idx, updateFileProperty
                 <input
                   type="range"
                   min="0"
-                  max={FILE_SIZE_STEPS.length - 1} // 10 steps
+                  max={FILE_SIZE_STEPS_SMALL.length - 1} // 10 steps
                   step="1"
                   value={currentStepIdx}
                   // onChange={(e) => setBlockSizeIdx(parseInt(e.target.value))}
@@ -166,7 +199,7 @@ const FileControl: React.FC<FileControlProps> = ({ file, idx, updateFileProperty
                     updateFileProperty(
                       file.id,
                       "sizeBytes",
-                      FILE_SIZE_STEPS[parseInt(e.target.value)].value
+                      FILE_SIZE_STEPS_SMALL[parseInt(e.target.value)].value
                     )
                   }
                   className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-[#7c0044]"
@@ -177,7 +210,7 @@ const FileControl: React.FC<FileControlProps> = ({ file, idx, updateFileProperty
                 <div className="relative mt-3 h-6">
                   {/* All 10 tick positions */}
                   <div className="absolute inset-0 flex justify-between pointer-events-none">
-                    {Array.from({ length: FILE_SIZE_STEPS.length }).map((_, i) => {
+                    {Array.from({ length: FILE_SIZE_STEPS_SMALL.length }).map((_, i) => {
                       const isMainTick = i % 2 === 0; // 5 labeled ticks
       
                       return (
@@ -192,7 +225,7 @@ const FileControl: React.FC<FileControlProps> = ({ file, idx, updateFileProperty
                           />
       
                           {/* Labels only for main ticks */}
-                          {isMainTick && FILE_SIZE_STEPS[i] && (
+                          {isMainTick && FILE_SIZE_STEPS_SMALL[i] && (
                             <span
                               className={`text-[15px] font-mono uppercase mt-1 ${
                                 currentStepIdx === i
@@ -200,7 +233,7 @@ const FileControl: React.FC<FileControlProps> = ({ file, idx, updateFileProperty
                                   : "text-zinc-400"
                               }`}
                             >
-                              {FILE_SIZE_STEPS[i].label}
+                              {FILE_SIZE_STEPS_SMALL[i].label}
                             </span>
                           )}
                         </div>
