@@ -5,15 +5,12 @@ import {
   Database,
   Folder,
   FileText,
-  Activity,
   ChevronDown,
   ChevronRight,
   User,
   Shield,
   HardDrive,
   Layers,
-  BoomBox,
-  Blocks,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -241,13 +238,6 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({
                                       {formatBytes(file.sizeBytes)}
                                     </span>
                                   </div>
-                                  {/* <div className="flex items-center gap-2 text-zinc-500"> */}
-                                  {/* < size={18} /> */}
-                                    {/* <span className="text-[15px]"># Blocks:</span>
-                                    <span className="text-[15px] text-zinc-900 font-mono">
-                                      {file.blocks.length}
-                                    </span>
-                                  </div> */}
                                 </div>
 
                                 {/* Nested Blocks Toggle */}
@@ -393,20 +383,6 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({
           </div>
         </div>
 
-        {/* Educational Insight
-        <div className="bg-zinc-900 p-4 rounded-xl space-y-2">
-          <div className="flex items-center gap-2 text-emerald-400">
-            <Activity size={14} />
-            <span className="text-[10px] font-bold uppercase tracking-widest">
-              Educational Insight
-            </span>
-          </div>
-          <p className="text-[11px] text-zinc-400 leading-relaxed">
-            The NameNode keeps the entire namespace in RAM. Each block replica
-            adds metadata overhead. Notice how increasing replication factor or
-            decreasing block size directly impacts RAM usage.
-          </p>
-        </div> */}
       </div>
     </div>
   );

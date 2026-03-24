@@ -1,9 +1,7 @@
 ---
 import "../styles/global.css";
 import "../styles/index.css";
-import Animation from "../components/Animation_lesson3.tsx";
 import ProgressBar from "./progressbar.astro";
-import { Play } from "lucide-react";
 import Lesson3Component from "../components/Lesson3.tsx";
 ---
 
@@ -20,37 +18,6 @@ import Lesson3Component from "../components/Lesson3.tsx";
     <h1 style="text-align: center;">NameNode</h1>
 
     <Lesson3Component client:load />
-
-    <!-- <p class="py-8">
-      Now that you know in how many blocks a file is split up based on the
-      selected block size, let's explore what this means for the different parts
-      of the HDFS architecture. <br />
-      The NameNode acts as a coordinator and must store three types of informations.
-      First, it stores the namespace tree. Open the "NameSpace" toggle in the NameNode
-      panel to see how the file namespace is stored. As you can see, it has a tree-like
-      structure that keeps track of which files belong to which user. Then, open the
-      "File Metadata" toggle and open the individual toggles for the four files. You
-      will see that it also stores metadata about the individual files.<br />
-      The second task of the NameNode is to store a mapping between the file and the
-      blocks into which it was split. Go to the "File Metadata" toggle again, and
-      click on the "Blocks" toggle in each file. There, you can see the mapping that
-      is done. You will also see how many blocks are stored for each file size based
-      on the block size. <br />
-      Start changing the block size, selecting different sizes for each file, and
-      observe how keeping track of the blocks changes. The total number of blocks
-      that the NameNode must keep track of is shown in the metadata statistics at
-      the bottom of the NameNode panel. As you can see, the number of blocks increases
-      significantly if you select a small block size. The storage usage shown in the
-      bottom right corner of the NameNode panel shows how much memory is required
-      to store all this information. In this example, it is still low because we are
-      only dealing with four files. However, imagine if this system had to store millions
-      of files; this number would get be quite big. <br />
-      The last thing that the NameNode has to track is the block mapping. This means
-      it has to track on which DataNodes the blocks are stored on. Click Next to explore
-      this.
-    </p>
-
-    <Animation client:load /> -->
 
     <!-- References to previous and next page -->
     <div class="flex justify-center gap-4 mt-6">

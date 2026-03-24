@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Controls } from './Controls_lesson3';
-import { FilePanel } from './FilePanel';
 import { NameNodePanel } from './NameNodePanel_lesson3';
-import { ClusterPanel } from './ClusterPanel';
 import type { FileData, RackData, DataNodeData } from '../types';
 import { BLOCK_SIZES, FILE_SIZE_STEPS, FILE_HUES, DATANODE_CAPACITY } from '../constants';
 import { generateBlocksForFile, distributeBlocks, calculateMetadataSize, computeNumberOfBlocksForFile } from '../utils/hdfsLogic';
@@ -40,7 +38,6 @@ export default function App() {
   const [blockSizeIdx, setBlockSizeIdx] = useState(2); // Default 128MB
   const [files, setFiles] = useState<FileData[]>([]);
   const [racks, setRacks] = useState<RackData[]>(INITIAL_RACKS);
-  const [showExplanation, setShowExplanation] = useState(false);
 
   const blockSizeBytes = BLOCK_SIZES[blockSizeIdx].value;
 
@@ -140,15 +137,6 @@ export default function App() {
             />
           </div>
 
-          {/* Center Column: DataNodes & Racks */}
-          {/* <div className="lg:col-span-6 min-h-[500px]">
-            <ClusterPanel racks={racks} allBlocks={files.flatMap(f => f.blocks)} files={files} />
-          </div> */}
-
-          {/* Right Column: Files & Blocks */}
-          {/* <div className="lg:col-span-6">
-            <FilePanel files={files} lessonNumber={3}/>
-          </div> */}
         </div>
 
         

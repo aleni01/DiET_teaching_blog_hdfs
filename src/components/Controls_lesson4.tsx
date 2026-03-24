@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { BLOCK_SIZES, FILE_SIZE_STEPS, FILE_SIZE_STEPS_SMALL } from "../constants";
 import { formatBytes } from "../utils/hdfsLogic";
 import type { FileData } from "../types";
-import { RotateCcw, Info } from "lucide-react";
 
 interface ControlsProps {
   numFiles: number;
@@ -72,12 +71,6 @@ export const Controls: React.FC<ControlsProps> = ({
               </div>
             </div>
 
-        
-
-            {/* {showWarning && (
-              <div>
-              <p>Your selected configuration needs more space than its currently available! Please adjust xy </p>
-            </div>)} */}
           </div>
         </div>
 
@@ -113,9 +106,6 @@ export const Controls: React.FC<ControlsProps> = ({
 
         {/* Column 2: File 1*/}
         <div>
-          {/* <h3 className="text-[15px] font-bold uppercase tracking-widest text-zinc-900">
-            File 1
-          </h3> */}
           <div className="space-y-8">
             {files.slice(0, 1).map((file, idx) => (
               <FileControl
@@ -189,7 +179,6 @@ const FileControl: React.FC<FileControlProps> = ({
           
         </label>
         <div className="text-[13pt] font-bold flex items-center gap-2"> {file.numBlocks} Blocks</div>
-        {/* <span className="text-[10px] font-mono text-zinc-500">{formatBytes(file.sizeBytes)}</span> */}
       </div>
 
       <div className="">
@@ -205,7 +194,7 @@ const FileControl: React.FC<FileControlProps> = ({
             max={FILE_SIZE_STEPS_SMALL.length - 1} // 10 steps
             step="1"
             value={currentStepIdx}
-            // onChange={(e) => setBlockSizeIdx(parseInt(e.target.value))}
+
             onChange={(e) =>
               updateFileProperty(
                 file.id,
@@ -257,7 +246,6 @@ const FileControl: React.FC<FileControlProps> = ({
 
       {/* Replication Factor */}
       <div className="space-y-1">
-        {/* <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Replication Factor: {file.replicationFactor}</p> */}
         <span className="text-[17px] font-bold text-zinc-900 py-0.5 rounded-full">
           Replication Factor
         </span>
@@ -296,7 +284,6 @@ const FileControl: React.FC<FileControlProps> = ({
 
       {/* Client Connection */}
       <div className="space-y-1">
-        {/* <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Client Connection: DN{file.clientNodeId.split('-')[1]}</p> */}
         <span className="text-[17px] font-bold text-zinc-900 py-0.5 rounded-full">
           Client Connection: DN{file.clientNodeId.split("-")[1]}
         </span>
@@ -306,7 +293,6 @@ const FileControl: React.FC<FileControlProps> = ({
           min="1"
           max="10"
           step="1"
-          // value={parseInt(file.clientNodeId.split('-')[1])}
           value={Number(file.clientNodeId.split("-")[1])}
           onChange={(e) =>
             updateFileProperty(file.id, "clientNodeId", `dn-${e.target.value}`)

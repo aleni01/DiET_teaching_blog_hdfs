@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Controls } from './Controls_lesson5';
-import { FilePanel } from './FilePanel';
 import { NameNodePanel } from './NameNodePanel_new';
 import { ClusterPanel } from './ClusterPanel';
 import type { FileData, RackData, DataNodeData } from '../types';
@@ -142,11 +141,6 @@ export default function App() {
           <div className="lg:col-span-7">
             <ClusterPanel racks={racks} allBlocks={files.flatMap(f => f.blocks)} files={files} />
           </div>
-
-          {/* Right Column: Files & Blocks
-          <div className="lg:col-span-3 min-h-[500px]">
-            <FilePanel files={files} />
-          </div> */}
         </div>
 
         

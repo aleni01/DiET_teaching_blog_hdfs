@@ -2,7 +2,6 @@ import React from "react";
 import { BLOCK_SIZES, FILE_SIZE_STEPS } from "../constants";
 import { formatBytes } from "../utils/hdfsLogic";
 import type { FileData } from "../types";
-import { RotateCcw, Info } from "lucide-react";
 
 interface ControlsProps {
   numFiles: number;
@@ -29,80 +28,41 @@ export const Controls: React.FC<ControlsProps> = ({
 }) => {
   return (
     <div className="bg-white p-6 rounded-2xl shadow-sm border border-black/5 space-y-6">
-      {/* <div className="flex items-center justify-between border-b border-zinc-100 pb-4">
-        <h2 className="text-xl font-bold tracking-tight text-zinc-900">Simulation & Control</h2>
-        <button 
-          onClick={onReset}
-          className="p-2 hover:bg-zinc-100 rounded-full transition-colors text-zinc-500"
-          title="Reset Simulation"
-        >
-          <RotateCcw size={20} />
-        </button>
-      </div> */}
+      {/* Column 1: Global Controls */}
+      <div className="space-y-6">
+        <div className="space-y-4">
+          <div>
+            {/* <label className="flex items-center gap-2 text-sm font-semibold text-zinc-700 mb-2"> */}
+            <h2 className="text-xl font-bold tracking-tight text-zinc-900">
+              Block Size
+            </h2>
 
-      {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8"> */}
-        {/* Column 1: Global Controls */}
-        <div className="space-y-6">
-          {/* <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-400">
-            Global Controls
-          </h3> */}
-          <div className="space-y-4">
-            {/* <div>
-              <label className="flex items-center gap-2 text-sm font-semibold text-zinc-700 mb-2">
-                Number of Files
-                <span className="text-xs font-normal text-zinc-400 bg-zinc-100 px-2 py-0.5 rounded-full">{numFiles}</span>
-              </label>
-              <input 
-                type="range" 
-                min="1" 
-                max="4" 
-                value={numFiles} 
-                onChange={(e) => setNumFiles(parseInt(e.target.value))}
-                className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-zinc-900"
-              />
-            </div> */}
-
-            <div>
-              {/* <label className="flex items-center gap-2 text-sm font-semibold text-zinc-700 mb-2"> */}
-              <h2 className="text-xl font-bold tracking-tight text-zinc-900">
-                Block Size
-              </h2>
-              {/* Block Size
-                            <span className="text-xs font-normal text-zinc-400 bg-zinc-100 px-2 py-0.5 rounded-full">
-                              {BLOCK_SIZES[blockSizeIdx].label}
-                            </span> */}
-              {/* </label> */}
-              <input
-                type="range"
-                min="0"
-                max={BLOCK_SIZES.length - 1}
-                step="1"
-                value={blockSizeIdx}
-                onChange={(e) => setBlockSizeIdx(parseInt(e.target.value))}
-                // className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-zinc-900"
-                className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-[#7c0044]"
-              />
-              <div className="flex justify-between mt-2 text-[15px] text-zinc-400 font-mono uppercase ">
-                {BLOCK_SIZES.map((s, i) => (
-                  <span
-                    key={i}
-                    className={
-                      i === blockSizeIdx ? "text-zinc-900 font-bold" : ""
-                    }
-                  >
-                    {s.label}
-                  </span>
-                ))}
-              </div>
+            <input
+              type="range"
+              min="0"
+              max={BLOCK_SIZES.length - 1}
+              step="1"
+              value={blockSizeIdx}
+              onChange={(e) => setBlockSizeIdx(parseInt(e.target.value))}
+              className="w-full h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer accent-[#7c0044]"
+            />
+            <div className="flex justify-between mt-2 text-[15px] text-zinc-400 font-mono uppercase ">
+              {BLOCK_SIZES.map((s, i) => (
+                <span
+                  key={i}
+                  className={
+                    i === blockSizeIdx ? "text-zinc-900 font-bold" : ""
+                  }
+                >
+                  {s.label}
+                </span>
+              ))}
             </div>
           </div>
-        {/* </div> */}
+        </div>
 
         {/* Column 2: Files 1 & 2 */}
         <div className="space-y-6">
-          {/* <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-400">
-            Files 1 & 2
-          </h3> */}
           <div className="space-y-8">
             {files.slice(0, 2).map((file, idx) => (
               <FileControl
@@ -117,9 +77,6 @@ export const Controls: React.FC<ControlsProps> = ({
 
         {/* Column 3: Files 3 & 4 */}
         <div className="space-y-6">
-          {/* <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-400">
-            Files 3 & 4
-          </h3> */}
           <div className="space-y-8">
             {files.slice(2, 4).map((file, idx) => (
               <FileControl
@@ -175,14 +132,11 @@ const FileControl: React.FC<FileControlProps> = ({
           />
           File {idx + 1}
         </label>
-        {/* <span className="text-[10px] font-mono text-zinc-500">
-          {formatBytes(file.sizeBytes)}
-        </span> */}
+
         <span className="text-[15px] font-bold text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-full">
           File size: {formatBytes(file.sizeBytes)}
         </span>
       </div>
-
 
       <div className="">
         {/* Slider wrapper so ticks can align */}
@@ -194,7 +148,6 @@ const FileControl: React.FC<FileControlProps> = ({
             max={FILE_SIZE_STEPS.length - 1} // 10 steps
             step="1"
             value={currentStepIdx}
-            // onChange={(e) => setBlockSizeIdx(parseInt(e.target.value))}
             onChange={(e) =>
               updateFileProperty(
                 file.id,
@@ -242,36 +195,6 @@ const FileControl: React.FC<FileControlProps> = ({
           </div>
         </div>
       </div>
-
-      {/* Replication Factor */}
-      {/* <div className="space-y-1">
-        <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Replication Factor: {file.replicationFactor}</p>
-        <input 
-          type="range" 
-          min="1" 
-          max="4" 
-          step="1"
-          value={file.replicationFactor} 
-          onChange={(e) => updateFileProperty(file.id, 'replicationFactor', parseInt(e.target.value))}
-          className="w-full h-1.5 bg-zinc-200 rounded-lg appearance-none cursor-pointer"
-          style={{ accentColor: `hsl(${file.colorHue}, 70%, 50%)` }}
-        />
-      </div> */}
-
-      {/* Client Connection */}
-      {/* <div className="space-y-1">
-        <p className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">Client Connection: DN{file.clientNodeId.split('-')[1]}</p>
-        <input 
-          type="range" 
-          min="1" 
-          max="10" 
-          step="1"
-          value={parseInt(file.clientNodeId.split('-')[1])} 
-          onChange={(e) => updateFileProperty(file.id, 'clientNodeId', `dn-${e.target.value}`)}
-          className="w-full h-1.5 bg-zinc-200 rounded-lg appearance-none cursor-pointer"
-          style={{ accentColor: `hsl(${file.colorHue}, 70%, 50%)` }}
-        />
-      </div> */}
     </div>
   );
 };

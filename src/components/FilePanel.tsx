@@ -1,7 +1,6 @@
 import React from "react";
 import type { FileData } from "../types";
 import { motion, AnimatePresence } from "motion/react";
-// import { motion, AnimatePresence } from "framer-motion";
 import { formatBytes } from "../utils/hdfsLogic";
 
 interface FilePanelProps {
@@ -14,7 +13,6 @@ export const FilePanel: React.FC<FilePanelProps> = ({
   lessonNumber = 0,
 }) => {
   return (
-    // davor war noch h-full drin in className von div
     <div className="bg-white p-6 rounded-2xl shadow-sm border border-black/5 space-y-6 overflow-y-auto">
       <h2 className="text-xl font-bold tracking-tight text-zinc-900">
         Files & Blocks
@@ -44,15 +42,10 @@ export const FilePanel: React.FC<FilePanelProps> = ({
                     </p>
                   )}
                   {lessonNumber == 2 && (
-                    // <p className="text-[15px] text-zinc-400 font-mono uppercase tracking-wider">
-                    //   {formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}
-                    //   Blocks
-                    // </p>
                     <label
                       className="text-xs font-bold flex items-center gap-2"
                       style={{ color: `hsl(${file.colorHue}, 70%, 40%)` }}
                     >
-                      {/* <div className="w-2 h-2 rounded-full" style={{ backgroundColor: `hsl(${file.colorHue}, 70%, 50%)` }} /> */}
                       {/* File {idx + 1} */}
                       <span className="text-[15px] font-bold text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-full tracking-wider">
                         {formatBytes(file.sizeBytes)} • {file.numBlocks}{" "}
@@ -61,15 +54,10 @@ export const FilePanel: React.FC<FilePanelProps> = ({
                     </label>
                   )}
                   {lessonNumber == 3 && (
-                    // <p className="text-[15px] text-zinc-400 font-mono uppercase tracking-wider">
-                    //   {formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}
-                    //   Blocks
-                    // </p>
                     <label
                       className="text-xs font-bold flex items-center gap-2"
                       style={{ color: `hsl(${file.colorHue}, 70%, 40%)` }}
                     >
-                      {/* <div className="w-2 h-2 rounded-full" style={{ backgroundColor: `hsl(${file.colorHue}, 70%, 50%)` }} /> */}
                       {/* File {idx + 1} */}
                       <span className="text-[15px] font-bold text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-full tracking-wider">
                         {formatBytes(file.sizeBytes)} • {file.numBlocks}{" "}
@@ -79,15 +67,10 @@ export const FilePanel: React.FC<FilePanelProps> = ({
                   )}
 
                   {lessonNumber == 4 && (
-                    // <p className="text-[15px] text-zinc-400 font-mono uppercase tracking-wider">
-                    //   {formatBytes(file.sizeBytes)} • {file.blocks.length}{" "}
-                    //   Blocks
-                    // </p>
                     <label
                       className="text-xs font-bold flex items-center gap-2"
                       style={{ color: `hsl(${file.colorHue}, 70%, 40%)` }}
                     >
-                      {/* <div className="w-2 h-2 rounded-full" style={{ backgroundColor: `hsl(${file.colorHue}, 70%, 50%)` }} /> */}
                       {/* File {idx + 1} */}
                       <span className="text-[15px] font-bold text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded-full tracking-wider">
                         {formatBytes(file.sizeBytes)} • {file.numBlocks}{" "}

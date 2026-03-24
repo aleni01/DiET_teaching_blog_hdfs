@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import "../styles/index.css";
-import Animation from "../components/Animation_lesson4.tsx";
 import ProgressBar from "./progressbar.astro";
 import Lesson4Component from "../components/Lesson4.tsx";
 ---
@@ -19,65 +18,6 @@ import Lesson4Component from "../components/Lesson4.tsx";
     <h1 style="text-align: center;">DataNodes and the replication strategy</h1>
 
     <Lesson4Component client:load />
-
-    <!-- <div class="grid grid-cols-3 gap-8 py-8">
-      <div class="col-span-1">
-        <p class="py-8">
-          The DataNodes are responsible for storing the individual data blocks
-          of the files. If a client wants to store its data on HDFS, it sends a
-          request to the NameNode and the NameNode then tells the client on
-          which DataNodes to store the data. The DataNode itself also has some
-          metadata where it keeps track of which blocks it has stored. <br>
-          
-          Change
-          the client connection slider to change to which DataNode the client is
-          directed to write his data. <br />
-
-          Now adapt the file size to see how this influences how DataNodes are filled
-          up. 
-          
-          This animation is simplified, as all blocks are filled into at the same
-          time and just fill up the DataNode the client is connected to and afterwards
-          continue with the next DataNode, but in reality for each block a client
-          wants to write, it would need to request at the NameNode to which DataNode
-          it should connect to.<br />
-
-          Adapt the block size to see how this changes the amount of blocks stored.
-
-
-          Until now, it seems quite useful to just select a big file size, so that
-          the NameNode and the DataNode has to store less data. But this is not quite
-          what is done in reality. The problem is that DataNodes can stop to work
-          or the individual data blocks can get corrupted, and therefore you want
-          to store the blocks multiple times to be sure that there is always a replica
-          that is avlailable and not corrupted. 
-          
-          Change the replication factor to see
-          how blocks are replicated across the data center. <br />
-
-          As you can see, the data blocks seems to be replicated according to some
-          specific rules. The first replica is stored on the DataNode the client is
-          connected to, the second rreplica is stored on a DataNode that is on another
-          rack and the third replica is stored on the same rack as the second replica,
-          but on a different DataNode. From the fourth replica on, the NameNode tries
-          to follow two guidelines, namely to not store two replicas on the same DataNode
-          and to store replicas on at most two DataNodes of a rack.<br />
-          The problem is that if a data block is corrupted or lost, we need to replicate
-          it over the data center. And therefore it would be quite good if the amount
-          of lost data is kept small. This is the reason why the selected block size
-          is 128 MB and not a bigger one. <br />
-
-          Now change the number of files to two and experiment with different settings
-          for the two files together to see how the system behaves. 
-        </p>
-
- 
-      </div> -->
-
-      <!-- <div class="col-span-2">
-        <Animation client:load />
-      </div>
-    </div> -->
 
     <!-- References to previous and enxt page -->
     <div class="flex justify-center gap-4 mt-6">

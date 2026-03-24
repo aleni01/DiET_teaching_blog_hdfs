@@ -5,15 +5,12 @@ import {
   Database,
   Folder,
   FileText,
-  Activity,
   ChevronDown,
   ChevronRight,
   User,
   Shield,
   HardDrive,
   Layers,
-  BoomBox,
-  Blocks,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -310,53 +307,8 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({
                 Block Mapping
               </span>
             </div>
-            {/* {expandedSections.mapping ? (
-              <ChevronDown size={16} className="text-zinc-400" />
-            ) : (
-              <ChevronRight size={16} className="text-zinc-400" />
-            )} */}
           </button>
 
-          {/* <AnimatePresence>
-            {expandedSections.mapping && (
-              <motion.div
-                initial={{ height: 0 }}
-                animate={{ height: "auto" }}
-                exit={{ height: 0 }}
-                className="overflow-hidden bg-white"
-              >
-                <div className="p-4 space-y-4 font-mono text-[10px]">
-                  {files.map((file, idx) => (
-                    <div key={file.id} className="text-[15px] space-y-2">
-                      <div className="text-zinc-900 font-bold">
-                        f{idx + 1}: {"{"}
-                      </div>
-                      <div className="pl-4 space-y-1">
-                        {file.blocks.map((block) => (
-                          <div
-                            key={block.id}
-                            className="flex items-center gap-2"
-                          >
-                            <div
-                              className="w-4 h-6 rounded-sm border border-black/5"
-                              style={{ backgroundColor: block.color }}
-                            />
-                            <span className="text-zinc-400">→</span>
-                            <span className="text-zinc-600">
-                              {block.replicas
-                                .map((r) => `DN${r.dataNodeId.split("-")[1]}`)
-                                .join(", ")}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="text-zinc-900 font-bold">{"}"}</div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence> */}
         </div>
 
         {/* Metadata Stats */}
@@ -384,20 +336,6 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({
           </div>
         </div>
 
-        {/* Educational Insight
-        <div className="bg-zinc-900 p-4 rounded-xl space-y-2">
-          <div className="flex items-center gap-2 text-emerald-400">
-            <Activity size={14} />
-            <span className="text-[10px] font-bold uppercase tracking-widest">
-              Educational Insight
-            </span>
-          </div>
-          <p className="text-[11px] text-zinc-400 leading-relaxed">
-            The NameNode keeps the entire namespace in RAM. Each block replica
-            adds metadata overhead. Notice how increasing replication factor or
-            decreasing block size directly impacts RAM usage.
-          </p>
-        </div> */}
       </div>
     </div>
   );
