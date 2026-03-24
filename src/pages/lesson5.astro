@@ -15,16 +15,16 @@ import ProgressBar from "./progressbar.astro";
   </head>
   <body>
     <ProgressBar step={4} total={4} />
-    <h1 style="text-align: center;">HDFS block storage animation</h1>
+    <h1 style="text-align: center;">HDFS visualization</h1>
+
     <p class="py-8 max-w-[1000px] mx-auto">
-      You have seen what HDFS is, how it is used, how files are split into
-      blocks, and how those blocks are stored on the DataNodes. Below, you will
-      see the full animation, where you can select how many files you want to
-      store, which DataNode to connect to, and what storage looks like and where
-      the blocks are placed. Now, try different scenarios and see what happens. <br
-      />
-      The only new feature is the block mapping inside the NameNode, which shows where
-      the replicas of all the blocks are stored for each file.
+      You have now learned how HDFS works: how files are divided into blocks, how those blocks are stored on DataNodes, and how the system manages storage across the data centre. <br>
+
+      Below is the full visualization, where you can freely experiment with the system. You can choose how many files to store, select the DataNode the client connects to, and observe how storage is used and where blocks are placed. <br>
+
+      A new feature in this view is the "Block mapping" inside the NameNode, which shows where all replicas of each block are stored for every file. <br>
+
+      Try different configurations and explore how the system behaves under different scenarios.
     </p>
 
     <Animation client:load />

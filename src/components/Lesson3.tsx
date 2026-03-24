@@ -9,8 +9,10 @@ export default function App() {
     <div className="grid grid-cols-3 gap-8 py-8">
       <div className="col-span-1">
         <p className="mb-2">
-          The NameNode acts as a coordinator and must store three types of
-          informations. First, it stores the namespace tree.
+          The NameNode acts as a coordinator and stores three types of
+          information.
+          <h4>Namespace Tree</h4> 
+          First, it stores the namespace tree, which represents how files are organised.
         </p>
         <div className="bg-[oklch(0.8335_0.026_84.59)] rounded-xl text-[oklch(0.3816_0.1558_356.93)] px-4 py-4">
           <p className="">
@@ -18,8 +20,7 @@ export default function App() {
               size={18}
               className="inline text-[oklch(0.3816_0.1558_356.93)] fill-[oklch(0.3816_0.1558_356.93)]"
             />{" "}
-            Open the "NameSpace Tree" toggle in the NameNode panel to see how the
-            file namespace is stored.
+            Open the "NameSpace Tree" toggle in the NameNode panel.
           </p>
          {counter<2 && (<div className="flex justify-center mt-2">
             <button
@@ -34,16 +35,19 @@ export default function App() {
         {counter >= 2 && (
           <>
             <p className="mb-2">
-              As you can see, it has a tree-like structure that keeps track of
-              which files belong to which user.
+              The namespace tree has a tree-like structure that keeps track of
+              which files belong to each user.
             </p>
+            <h4>File Metadata</h4>
+            <p>The NameNode also stores metadata about individual Files.</p>
             <div className="bg-[oklch(0.8335_0.026_84.59)] rounded-xl text-[oklch(0.3816_0.1558_356.93)] px-4 py-4">
+            
               <p>
                 <Play
                   size={18}
                   className="inline text-[oklch(0.3816_0.1558_356.93)] fill-[oklch(0.3816_0.1558_356.93)]"
                 />{" "}
-                Open the "File Metadata" toggle and open the individual toggles
+                Open the "File Metadata" toggle and expand the individual toggles
                 for the four files.{" "}
               </p>
             {counter<3 &&   (<div className="flex justify-center mt-2">
@@ -61,11 +65,12 @@ export default function App() {
         {counter >= 3 && (
           <>
             <p className="mb-4">
-              You see that it also stores metadata about the individual files.
+              Each file contains metadata describing its properties.
             </p>
+            <h4>File-to-block Mapping</h4>
             <p >
-              The second task of the NameNode is to store a mapping between the
-              file and the blocks into which it was split.
+              The second task of the NameNode is to maintain a mapping between the
+              files and the blocks into which they was split.
             </p>
             <div className="bg-[oklch(0.8335_0.026_84.59)] rounded-xl text-[oklch(0.3816_0.1558_356.93)] px-4 py-4">
               <p>
@@ -73,8 +78,8 @@ export default function App() {
                   size={18}
                   className="inline text-[oklch(0.3816_0.1558_356.93)] fill-[oklch(0.3816_0.1558_356.93)]"
                 />{" "}
-                Go to the "File Metadata" toggle again, and click on the
-                "Blocks" toggle in each file.{" "}
+                Within the "File Metadata" toggle, open the
+                "Blocks" toggle for each file.{" "}
               </p>
             { counter <4 &&  (<div className="flex justify-center mt-2">
                 <button
@@ -90,21 +95,19 @@ export default function App() {
         )}
         {counter >= 4 && (
           <>
-            <p>
-              There, you can see the mapping that is done. You will also see how
-              many blocks are stored for each file size based on the block size.
+            <p className="mb-2">
+              You see how
+              many blocks each file contains based on the selected block size.
             </p>
+              <h4>Effect of Block Size</h4>
             <div className="bg-[oklch(0.8335_0.026_84.59)] rounded-xl text-[oklch(0.3816_0.1558_356.93)] px-4 py-4">
               <p>
                 <Play
                   size={18}
                   className="inline text-[oklch(0.3816_0.1558_356.93)] fill-[oklch(0.3816_0.1558_356.93)]"
                 />{" "}
-                Start changing the block size, selecting different sizes for
-                each file, and observe how keeping track of the blocks changes.
-                The total number of blocks that the NameNode must keep track of
-                is shown in the metadata statistics at the bottom of the
-                NameNode panel.{" "}
+                Change the block size by selecting different sizes for
+                each file. {" "}
               </p>
              { counter<5 && (<div className="flex justify-center mt-2">
                 <button
@@ -121,18 +124,22 @@ export default function App() {
         {counter >= 5 && (
           <>
             <p>
-              As you can see, the number of blocks increases significantly if
-              you select a small block size. The storage usage shown in the
-              bottom right corner of the NameNode panel shows how much memory is
-              required to store all this information. In this example, it is
-              still low because we are only dealing with four files. However,
-              imagine if this system had to store millions of files; this number
-              would get be quite big.{" "}
+            Notice how the number of blocks changes. The total number of blocks tracked by NameNode
+                is displayed in the metadata statistics at the bottom of the
+                NameNode panel.
+            </p>
+            <p className="mb-2">
+              Smaller block sizes significantly increase the number of blocks that must be tracked. The storage usage shown in the bottom-right corner of the NameNode panel indicates how much memory is required to store this metadata. While the usage is small for four files, it would become much larger in systems storing millions of files. 
+              {" "}
             </p>{" "}
-            <p className="mt-4">
-              The last thing that the NameNode has to track is the block
-              mapping. This means it has to track on which DataNodes the blocks
-              are stored on.
+            <h4>Block Mapping</h4>
+            <p className="">
+              Finally, the NameNode tracks where each block
+              is stored by maintaining a mapping between blocks and the DataNodes that store them.
+            </p>
+
+            <p className="mt-2">
+              Explore how the data blocks are stored on the DataNodes on the next page.
             </p>
           </>
         )}

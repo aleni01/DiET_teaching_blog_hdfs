@@ -13,20 +13,24 @@ import ProgressBar from "./progressbar.astro";
     />
   </head>
   <body>
-    <h1 style="text-align: center;">HDFS</h1>
+    <h1 style="text-align: center;">Hadoop Distributed File Systems</h1>
     <div class="grid grid-cols-3 gap-8">
       <div class="col-span-1 py-8">
         <p class="py-5">
-          HDFS stands for Hadoop distributed file systems and is a data center
-          that is used to store large amount data and files that are too big to
-          store on a single machine. These files are typically in the GB to TB
-          range. <br />
-          HDFS's architecture is centralized and consists of a Master Node, named
-          the NameNode, and thousands of DataNodes. The NameNode keeps track how files
-          are split up and where the pieces are stored. The DataNodes store the individual
-          data blocks. Multiple DataNodes are stacked on top of each other in a rack,
-          and the racks form the data center. <br />
-          Go to the next page to see how files are split up.
+         
+          HDFS is a distributed storage system designed to store very large files 
+          that are too big to fit on a single machine, typically ranging from gigabytes (GB) to terabytes (TB). 
+          It runs across thousands of machines within a data centre. <br/>
+
+          <h4>Architecture</h4>
+          HDFS uses a centralised architecture consisting of a master node, called the NameNode, and thousands of 
+          worker nodes known as DataNodes. The NameNode manages the file system's metadata and the DataNodes store the actual data blocks.
+
+          The DataNodes are organised into racks, with multiple racks forming the data centre. 
+        </p>
+
+        <p class="mt-2">
+          The next page shows how files are split into blocks. 
         </p>
       </div>
       <div class="col-span-2 py-12">

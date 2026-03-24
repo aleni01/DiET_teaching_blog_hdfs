@@ -108,9 +108,7 @@ export const Controls: React.FC<ControlsProps> = ({
                 <div className="py-4 text-[25px] bg-red-800 text-white border-4 border-yellow-400 animate-pulse rounded-xl px-3">
                   <p className="font-semibold">
                     {" "}
-                    ⚠️ Your selected configuration needs more space than its
-                    currently available! Please reduce either the replication
-                    factor, the file size, or increase the block size.{" "}
+                    ⚠️ The configuration you have selected requires more space than is currently available! Please either reduce the replication factor or the file size, or increase the block size.{" "}
                   </p>
                 </div>
               )}

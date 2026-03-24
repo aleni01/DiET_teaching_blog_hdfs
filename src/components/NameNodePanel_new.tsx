@@ -369,7 +369,7 @@ export const NameNodePanel: React.FC<NameNodePanelProps> = ({
               </p>
               <p className="centered-text text-lg font-bold text-zinc-900">
                 {/* {files.reduce((acc, f) => acc + f.blocks.length, 0)} */}
-                {files.reduce((acc,f) => acc + f.numBlocks, 0)}
+                {files.reduce((acc,f) => acc + f.numBlocks*f.replicationFactor, 0)}
               </p>
             </div>
             <div className="bg-zinc-50 p-3 rounded-xl border border-zinc-100">

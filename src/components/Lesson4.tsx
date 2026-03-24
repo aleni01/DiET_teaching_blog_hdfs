@@ -8,20 +8,23 @@ export default function App() {
   return (
     <div className="grid grid-cols-3 gap-8 py-8">
       <div className="col-span-1">
+        
         <p className="">
           The DataNodes are responsible for storing the individual data blocks
-          of the files. If a client wants to store its data on HDFS, it sends a
-          request to the NameNode and the NameNode then tells the client on
-          which DataNodes to store the data. The DataNode itself also has some
-          metadata where it keeps track of which blocks it has stored. <br />
+          of files. When a client wants to store data in HDFS, it first sends a
+          request to the NameNode. The NameNode then tells the client
+          which DataNodes should receive the data. 
+          Each DataNode also maintains
+          metadata describing which blocks it stores locally. <br />
+          <h4>Writing Data to DataNodes</h4>
           <div className="bg-[oklch(0.8335_0.026_84.59)] rounded-xl text-[oklch(0.3816_0.1558_356.93)] px-4 py-4">
             <p className="">
               <Play
                 size={18}
                 className="inline text-[oklch(0.3816_0.1558_356.93)] fill-[oklch(0.3816_0.1558_356.93)]"
               />{" "}
-              Change the client connection slider to change to which DataNode
-              the client is directed to write his data.
+              Change the client connection slider to select to which DataNode
+              the client writes its data.
             </p>
             {counter < 2 && (
               <div className="flex justify-center mt-2">
@@ -36,13 +39,19 @@ export default function App() {
             )}
           </div>
           {counter >= 2 && (
-            <div className="bg-[oklch(0.8335_0.026_84.59)] rounded-xl text-[oklch(0.3816_0.1558_356.93)] px-4 py-4 mt-2">
+            <>
+            <p>Notice how data is written to the selected DataNode.</p>
+            <p> 
+         ⚠️ In this animation, blocks are written simultaneously and fill the connected DataNode before continuing to the next one. In a real HDFS system, the client would contact the NameNode for every block to determine the appropriate DataNode destination.
+        </p>
+            <h4 className= "mt-2">Influence of File Size</h4>
+            <div className="bg-[oklch(0.8335_0.026_84.59)] rounded-xl text-[oklch(0.3816_0.1558_356.93)] px-4 py-4">
               <p className="">
                 <Play
                   size={18}
                   className="inline text-[oklch(0.3816_0.1558_356.93)] fill-[oklch(0.3816_0.1558_356.93)]"
                 />{" "}
-                Now adapt the file size to see how this influences how DataNodes
+                Adjust the file size to how this affects how the DataNodes
                 are filled up.
               </p>
               {counter < 3 && (
@@ -57,26 +66,30 @@ export default function App() {
                 </div>
               )}
             </div>
+            </>
           )}
 
-        {counter >= 3 && ( <p> 
-            The animation is simplified, as all blocks are filled into at the
-          same time and just fill up the DataNode the client is connected to and
-          afterwards continue with the next DataNode, but in reality for each
-          block a client wants to write, it would need to request at the
-          NameNode to which DataNode it should connect to.
-        </p>)}
+        {counter >= 3 && (<>
+        <p>
+          Larger files are split into more blocks, causing more storage to be used across DataNodes.
+        </p>
+          
+      
+        </>
 
-        {counter >= 3 && (
-            <div className="bg-[oklch(0.8335_0.026_84.59)] rounded-xl text-[oklch(0.3816_0.1558_356.93)] px-4 py-4 mt-4">
+      )}
+
+        {counter >= 3 && ( <>
+        <h4 className="mt-2">Influence of Block Size</h4>
+        
+            <div className="bg-[oklch(0.8335_0.026_84.59)] rounded-xl text-[oklch(0.3816_0.1558_356.93)] px-4 py-4">
               <p className="">
                 <Play
                   size={18}
                   className="inline text-[oklch(0.3816_0.1558_356.93)] fill-[oklch(0.3816_0.1558_356.93)]"
                 />{" "}
                 
-          Adapt the block size to see how this changes the amount of blocks
-          stored. 
+          Change the block size and observe how the number of stored blocks changes.
               </p>
               {counter < 4 && (
                 <div className="flex justify-center mt-2">
@@ -90,23 +103,27 @@ export default function App() {
                 </div>
               )}
             </div>
+        </>
           )}
          
           
         {counter >= 4 && (<> 
-            <p> Until now, it seems quite useful to just select a big block
-          size, so that the NameNode and the DataNode have to store less data.
-          But this is not quite what is done in reality. </p>
+        <p>
+          Smaller block sizes create more blocks, increasing the amount of metadata that must be tracked.
+        </p>
+        <p>
+          At first, it may seem beneficial to use very large block sizes to reduce metadata overhead. However, this is not how real systems operate.
+        </p>
+        <h4 className="mt-2"> Replication is important</h4>
+
           <p className="mt-1"> The problem is that
-          DataNodes can stop to work or the individual data blocks can get
-          corrupted, and therefore you want to store the blocks multiple times
-          to be sure that there is always a replica that is avlailable and not
-          corrupted.</p>
+          DataNodes may fail, and data blocks can become
+          corrupted. To ensure reliability, HDFS stores multiple replicas of each block.</p>
         
         </>)}
           
           {counter >= 4 && (
-            <div className="bg-[oklch(0.8335_0.026_84.59)] rounded-xl text-[oklch(0.3816_0.1558_356.93)] px-4 py-4 mt-4">
+            <div className="bg-[oklch(0.8335_0.026_84.59)] rounded-xl text-[oklch(0.3816_0.1558_356.93)] px-4 py-4">
               <p className="">
                 <Play
                   size={18}
@@ -115,7 +132,7 @@ export default function App() {
                 
             
                 Change the replication factor to see how blocks are
-          replicated across the data center. The number inside the block shows which replica it is.
+          replicated across the data centre. The number inside the block indicate its replica number.
               </p>
               {counter < 5 && (
                 <div className="flex justify-center mt-2">
@@ -131,24 +148,27 @@ export default function App() {
             </div>
           )}
          
-          {counter >= 5 && ( <> <p className="mt-2">  As you can see, the data blocks seems to be replicated according to
-          some specific rules. The first replica is stored on the DataNode the
-          client is connected to, the second rreplica is stored on a DataNode
-          that is on another rack and the third replica is stored on the same
-          rack as the second replica, but on a different DataNode. From the
-          fourth replica on, the NameNode tries to follow two guidelines, namely
-          to not store two replicas on the same DataNode and to store replicas
-          on at most two DataNodes of a rack. 
-          </p><p className="mt-2">
-          The problem is that if a data block is corrupted or lost, we need to
-          replicate it over the data center. And therefore it would be quite
-          good if the amount of lost data is kept small. This is the reason why
-          the selected block size is 128 MB and not a bigger one. </p>
+          {counter >= 5 && ( <>
+          <h4 className="mt-2">Replication Placement Strategy</h4>
+           <p>  
+          Blocks are replicated according to specific rules:
+          The first replica is stored on the DataNode connected to the client.
+          The second replica is stored on a DataNode in a different rack.
+          The third replica is stored on another DataNode within that same rack.
+          Additional replicas follow two guidelines:
+          No two replicas are stored on the same DataNode.
+          Replicas are distributed across racks to improve fault tolerance.
+         
+          </p>
+          <h4 className="mt-2">Why Block Size matters</h4>
+          <p >
+          If a block is lost or corrupted, it must be replicated again across the data centre. Smaller blocks limit the amount of data lost during failures. This is why HDFS uses a block size of 128 MB rather than much larger blocks.
+        </p>
           
           </>)}
 
           {counter >= 5 && (
-            <div className="bg-[oklch(0.8335_0.026_84.59)] rounded-xl text-[oklch(0.3816_0.1558_356.93)] px-4 py-4 mt-4">
+            <div className="bg-[oklch(0.8335_0.026_84.59)] rounded-xl text-[oklch(0.3816_0.1558_356.93)] px-4 py-4">
               <p className="">
                 <Play
                   size={18}
@@ -156,14 +176,32 @@ export default function App() {
                 />{" "}
                 
             
-                Now change the number of files to two and experiment with different
-                settings for the two files together to see how the system behaves.
+                Set the number of files to two and experiment with different
+                file sizes, block sizes, and replication factors to observe how the system behaves.
               </p>
+
+              {counter < 6 && (
+                <div className="flex justify-center mt-2">
+                  <button
+                    className="bg-[oklch(0.3816_0.1558_356.93)] px-12 rounded text-[#e7deccfd] cursor-pointer py-2 disabled:cursor-not-allowed"
+                    onClick={() => setCounter(6)}
+                    disabled={counter > 5}
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+
+              
+              
              
             </div>
 
           )}
 
+{counter >= 6 && (
+                <p className="mt-2">Explore how all the components act together on the next page.</p>
+              )}
         
         </p>
       </div>

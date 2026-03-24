@@ -33,6 +33,15 @@ body {
     font-family: 'Goudy Old Style', sans-serif;
   }
 
+  h4 {
+    color: #7c0044; /*great color: #7c0044*/
+    font-weight: bold;
+    font-size: 30px;
+    /* font-family: fantasy; */
+    /* font-family: 'Typo Round Bold Demo', sans-serif; */
+    font-family: 'Goudy Old Style', sans-serif;
+  }
+
   .progress-bar {
     height: 20px;
     background: #fff9edfd;
