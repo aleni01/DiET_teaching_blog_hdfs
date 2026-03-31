@@ -154,7 +154,7 @@ export default function App() {
           Blocks are replicated according to specific rules:
           The first replica is stored on the DataNode connected to the client.
           The second replica is stored on a DataNode in a different rack.
-          The third replica is stored on another DataNode within that same rack.
+          The third replica is stored on another DataNode within the same rack as the rack from the second replica.
           Additional replicas follow two guidelines:
           No two replicas are stored on the same DataNode.
           Replicas are distributed across racks to improve fault tolerance.
